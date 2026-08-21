@@ -1,159 +1,172 @@
 <!--
-  Rodychi Fit Score™ · v2
+  Rodychi Fit Score™ · v5
   ────────────────────────
-  Gamified quiz-funnel · contact-first reveal
-  Single-file HTML · drop in Vercel/Netlify/GitHub Pages
+  Value-stack splash · gamified progress · before/after result · lead magnets
 -->
 <!DOCTYPE html>
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Rodychi Fit Score — Дізнайтесь чи готовий ваш бізнес до Telegram</title>
-<meta name="description" content="12 питань — і ви побачите наскільки ваш бізнес готовий рости в Telegram. Плюс персональні рекомендації від Rodychi.">
-<meta property="og:title" content="Rodychi Fit Score — 5-хв аудит">
-<meta property="og:description" content="Персональний дашборд для вашого бізнесу за 5 хвилин.">
-<meta property="og:image" content="rodychi_logo.png">
+<title>Rodychi Fit Score — гра-аудит для вашого бізнесу</title>
+<meta name="description" content="Гра-аудит на 12 питань. Отримайте Fit Score, прогноз росту, персональний playbook і план дій — усе безкоштовно за 5 хвилин.">
+<meta property="og:title" content="Rodychi Fit Score — гра-аудит для бізнесу">
+<meta property="og:description" content="Персональний план росту в Telegram за 5 хвилин. Безкоштовно.">
+<meta property="og:image" content="https://rodychi.media/rodychi-fit-score/rodychi_logo.png">
+<link rel="icon" href="https://rodychi.media/rodychi-fit-score/rodychi_logo.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --sapphire: #0A1E5C;
-    --sapphire-deep: #071440;
-    --sapphire-2: #1C2951;
-    --royal: #1E3A8A;
+    --sapphire: #08163F;
+    --sapphire-2: #0F1E4E;
+    --sapphire-3: #1A2A5F;
     --gold: #D4AF37;
-    --gold-light: #F4E1A1;
+    --gold-lite: #F0D06B;
     --gold-glow: rgba(212,175,55,0.4);
     --white: #FFFFFF;
     --bone: #F8F8F5;
-    --ink: #0D0D14;
-    --slate: #4B5563;
-    --slate-light: rgba(255,255,255,0.65);
+    --ink: #0A0F1E;
+    --slate: #7E869B;
+    --slate-lite: rgba(255,255,255,0.55);
     --success: #4ADE80;
     --warning: #FBBF24;
     --danger: #F87171;
+    --border: rgba(255,255,255,0.08);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  html, body { height: 100%; }
+  html { scroll-behavior: smooth; }
+  html, body { min-height: 100%; }
   body {
     font-family: 'Manrope', -apple-system, sans-serif;
-    background: var(--sapphire-deep);
+    background: var(--sapphire);
     color: var(--white);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
-    line-height: 1.4;
+    line-height: 1.45;
     min-height: 100vh;
   }
   body::before {
-    content: '';
-    position: fixed; inset: 0;
+    content: ''; position: fixed; inset: 0;
     background:
-      radial-gradient(1200px 800px at 20% -10%, rgba(30,58,138,0.5), transparent 55%),
-      radial-gradient(900px 700px at 90% 100%, rgba(212,175,55,0.10), transparent 55%),
-      linear-gradient(180deg, var(--sapphire-deep), #050C24);
+      radial-gradient(1200px 800px at 15% -10%, rgba(26,42,95,0.9), transparent 55%),
+      radial-gradient(900px 700px at 90% 100%, rgba(212,175,55,0.12), transparent 55%),
+      linear-gradient(180deg, var(--sapphire) 0%, #050A24 100%);
     pointer-events: none; z-index: 0;
   }
   main { position: relative; z-index: 1; min-height: 100vh; padding-bottom: 40px; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
 
-  /* ─── Header ─── */
+  /* Header */
   .header {
-    padding: 20px 32px; display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 24px; display: flex; justify-content: space-between; align-items: center;
     max-width: 1200px; margin: 0 auto; width: 100%;
   }
   .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
-  .brand img { width: 40px; height: 40px; object-fit: contain; border-radius: 8px; }
-  .brand-name { font-weight: 700; letter-spacing: 3px; font-size: 12px; }
-  .header-cta { font-size: 13px; color: var(--slate-light); text-decoration: none; }
+  .brand img { width: 36px; height: 36px; object-fit: contain; }
+  .brand-name { font-weight: 700; letter-spacing: 3px; font-size: 11px; opacity: 0.85; }
+  .header-cta { font-size: 12px; color: var(--slate-lite); text-decoration: none; }
   .header-cta:hover { color: var(--white); }
 
-  /* ─── Progress ─── */
-  .progress-wrap { max-width: 720px; margin: 0 auto; padding: 0 32px; }
-  .progress-sections { display: flex; gap: 6px; margin-bottom: 10px; }
-  .progress-dot {
-    flex: 1; height: 4px; background: rgba(255,255,255,0.08);
-    border-radius: 2px; overflow: hidden; position: relative;
+  /* Progress */
+  .progress-wrap { max-width: 720px; margin: 0 auto; padding: 8px 24px 0; }
+  .level-bar {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+    padding: 12px 16px; background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border); border-radius: 12px;
   }
-  .progress-dot::after {
-    content: ''; position: absolute; inset: 0; width: 0%;
-    background: linear-gradient(90deg, var(--gold), var(--gold-light));
-    transition: width 0.5s ease;
+  .level-icon {
+    width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--gold), var(--gold-lite));
+    border-radius: 8px; font-weight: 800; color: var(--ink); font-size: 14px;
   }
-  .progress-dot.filled::after { width: 100%; }
-  .progress-dot.active::after { width: var(--fill, 50%); }
-  .progress-meta {
-    display: flex; justify-content: space-between;
-    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--slate-light); font-weight: 600;
-  }
-  .progress-meta .gold { color: var(--gold); }
+  .level-text { flex: 1; }
+  .level-label { font-size: 10px; color: var(--slate-lite); letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+  .level-name { font-size: 14px; font-weight: 700; margin-top: 2px; }
+  .level-count { font-family: 'JetBrains Mono', monospace; color: var(--gold); font-size: 13px; font-weight: 700; }
 
-  /* ─── Screens ─── */
-  .screen { display: none; padding: 30px 24px 40px; }
+  .progress-track {
+    height: 6px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden;
+    position: relative;
+  }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-lite));
+    border-radius: 3px; width: 0%;
+    transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 12px var(--gold-glow);
+  }
+
+  /* Screens */
+  .screen { display: none; padding: 24px 24px 40px; }
   .screen.active { display: block; animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-  @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes slideIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
   .container { max-width: 720px; margin: 0 auto; }
+  .wide-container { max-width: 860px; margin: 0 auto; }
 
-  /* ─── Splash ─── */
-  .splash { text-align: center; padding: 40px 20px 20px; }
-  .splash-logo { width: 140px; height: 140px; margin: 0 auto 32px; position: relative; }
-  .splash-logo img {
-    width: 100%; height: 100%; object-fit: contain;
-    filter: drop-shadow(0 20px 60px rgba(212,175,55,0.25));
-    animation: float 4s ease-in-out infinite;
-  }
-  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-  .splash-badge {
-    display: inline-block; padding: 6px 16px; border: 1px solid rgba(212,175,55,0.5);
-    border-radius: 100px; background: rgba(212,175,55,0.08);
-    color: var(--gold); font-size: 11px; letter-spacing: 3px;
-    text-transform: uppercase; font-weight: 700; margin-bottom: 24px;
-  }
+  /* Splash */
+  .splash-logo { width: 96px; height: 96px; margin: 20px auto 24px; display: block; animation: float 4s ease-in-out infinite; filter: drop-shadow(0 20px 40px rgba(212,175,55,0.25)); }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
   .splash-title {
-    font-weight: 800; font-size: clamp(36px, 6.5vw, 68px);
-    line-height: 1.02; letter-spacing: -1.5px; margin-bottom: 20px;
+    font-weight: 800; font-size: clamp(32px, 6vw, 60px);
+    line-height: 1.02; letter-spacing: -1.5px; text-align: center;
+    margin-bottom: 18px;
   }
   .splash-title .gold { color: var(--gold); }
   .splash-sub {
-    font-size: clamp(15px, 2vw, 18px); color: var(--slate-light);
-    max-width: 520px; margin: 0 auto 36px; line-height: 1.5;
+    font-size: clamp(15px, 2vw, 19px); color: var(--slate-lite);
+    max-width: 560px; margin: 0 auto 36px; line-height: 1.55; text-align: center;
   }
-  .splash-meta {
-    display: flex; gap: 32px; justify-content: center; margin-bottom: 40px;
-    flex-wrap: wrap;
-  }
-  .meta-item { text-align: center; }
-  .meta-val { font-weight: 800; font-size: 28px; color: var(--gold); line-height: 1; }
-  .meta-lbl { font-size: 10px; color: var(--slate-light); text-transform: uppercase; letter-spacing: 2px; margin-top: 6px; }
 
-  /* ─── Buttons ─── */
+  .value-stack {
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    border-radius: 20px; padding: 24px; margin-bottom: 32px;
+  }
+  .value-title {
+    font-size: 11px; color: var(--gold); letter-spacing: 2.5px; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 18px; text-align: center;
+  }
+  .value-list { display: flex; flex-direction: column; gap: 14px; }
+  .value-row { display: flex; gap: 14px; align-items: flex-start; }
+  .value-icon {
+    width: 32px; height: 32px; flex-shrink: 0; border-radius: 8px;
+    background: rgba(212,175,55,0.12); display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .value-text { flex: 1; line-height: 1.5; }
+  .value-text b { color: var(--white); font-weight: 700; }
+  .value-text span { color: var(--slate-lite); font-size: 13px; display: block; margin-top: 2px; }
+
+  .cta-hero {
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
   .btn {
-    display: inline-flex; align-items: center; gap: 8px; padding: 16px 32px;
-    border-radius: 100px; font-family: inherit; font-weight: 700; font-size: 15px;
+    display: inline-flex; align-items: center; gap: 8px; padding: 18px 40px;
+    border-radius: 100px; font-family: inherit; font-weight: 700; font-size: 16px;
     cursor: pointer; border: none; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); text-decoration: none;
     letter-spacing: 0.3px;
   }
   .btn-primary {
     background: linear-gradient(135deg, var(--gold), #E8C866);
-    color: var(--ink);
-    box-shadow: 0 8px 24px var(--gold-glow);
+    color: var(--ink); box-shadow: 0 8px 24px var(--gold-glow);
     position: relative; overflow: hidden;
   }
   .btn-primary::before {
     content: ''; position: absolute; inset: 0;
     background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.5) 50%, transparent 70%);
-    transform: translateX(-100%); transition: transform 0.6s;
+    transform: translateX(-100%); transition: transform 0.7s;
   }
   .btn-primary:hover::before { transform: translateX(100%); }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 44px var(--gold-glow); }
-  .btn-primary:active { transform: translateY(0); }
   .btn-primary:disabled { background: rgba(212,175,55,0.3); cursor: not-allowed; box-shadow: none; }
+  .btn-ghost { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.15); }
+  .btn-ghost:hover { border-color: var(--white); background: rgba(255,255,255,0.03); }
   .btn-hero {
-    padding: 22px 52px; font-size: 17px; letter-spacing: 0.5px;
-    animation: pulseGlow 2.4s ease-in-out infinite;
+    padding: 22px 44px; font-size: 17px;
+    animation: pulseGlow 2.8s ease-in-out infinite;
   }
   @keyframes pulseGlow {
     0%, 100% { box-shadow: 0 8px 24px rgba(212,175,55,0.3), 0 0 0 0 rgba(212,175,55,0.5); }
@@ -161,31 +174,31 @@
   }
   .btn-hero .arrow { display: inline-block; transition: transform 0.3s; }
   .btn-hero:hover .arrow { transform: translateX(6px); }
-  .btn-ghost { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.2); }
-  .btn-ghost:hover { border-color: var(--white); background: rgba(255,255,255,0.03); }
-  .btn-lg { padding: 20px 42px; font-size: 16px; }
   .btn-full { width: 100%; justify-content: center; }
 
-  /* ─── Question ─── */
-  .q-hero { margin-bottom: 32px; }
-  .q-section {
-    color: var(--gold); font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-    margin-bottom: 12px; font-weight: 700; display: flex; align-items: center; gap: 8px;
+  .trust-badges {
+    display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap;
+    color: var(--slate-lite); font-size: 12px; margin-top: 8px;
   }
-  .q-emoji { font-size: 44px; margin-bottom: 12px; display: block; animation: pop 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+  .trust-badges span { display: flex; align-items: center; gap: 6px; }
+  .trust-badges .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--slate); }
+
+  /* Questions */
+  .q-hero { margin-bottom: 28px; }
+  .q-emoji { font-size: 40px; margin-bottom: 10px; display: block; animation: pop 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
   @keyframes pop { 0% { transform: scale(0.6); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-  .q-title { font-weight: 800; font-size: clamp(24px, 4vw, 34px); line-height: 1.2; margin-bottom: 8px; letter-spacing: -0.5px; }
-  .q-hint { color: var(--slate-light); font-size: 14px; margin-bottom: 24px; }
+  .q-title { font-weight: 800; font-size: clamp(22px, 4vw, 32px); line-height: 1.2; margin-bottom: 8px; letter-spacing: -0.4px; }
+  .q-hint { color: var(--slate-lite); font-size: 14px; margin-bottom: 20px; }
 
   .options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
   .option {
-    padding: 18px 22px; background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.06);
-    border-radius: 14px; cursor: pointer; transition: all 0.15s;
-    font-weight: 600; font-size: 15px; text-align: left;
+    padding: 16px 20px; background: rgba(255,255,255,0.04);
+    border: 1.5px solid var(--border); border-radius: 14px; cursor: pointer;
+    transition: all 0.15s; font-weight: 600; font-size: 15px; text-align: left;
     display: flex; justify-content: space-between; align-items: center; gap: 12px;
     color: var(--white); font-family: inherit; position: relative;
   }
-  .option-emoji { font-size: 22px; }
+  .option-emoji { font-size: 20px; }
   .option-text { flex: 1; }
   .option:hover { background: rgba(212,175,55,0.06); border-color: rgba(212,175,55,0.3); transform: translateX(4px); }
   .option.selected {
@@ -194,67 +207,48 @@
   }
   .option.selected .option-text { color: var(--gold); }
   .option-check {
-    width: 22px; height: 22px; border-radius: 50%;
+    width: 20px; height: 20px; border-radius: 50%;
     border: 1.5px solid rgba(255,255,255,0.2); flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center; transition: all 0.15s;
   }
-  .option.selected .option-check {
-    background: var(--gold); border-color: var(--gold);
-  }
-  .option.selected .option-check::after { content: '✓'; color: var(--ink); font-weight: 800; font-size: 14px; }
-  .option-multi .option-check { border-radius: 6px; }
+  .option.selected .option-check { background: var(--gold); border-color: var(--gold); }
+  .option.selected .option-check::after { content: '✓'; color: var(--ink); font-weight: 800; font-size: 12px; }
+  .option-multi .option-check { border-radius: 5px; }
 
   /* Achievement toast */
   .achievement {
     position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px);
-    background: rgba(212,175,55,0.95); color: var(--ink);
-    padding: 10px 20px; border-radius: 100px; font-weight: 700; font-size: 13px;
-    box-shadow: 0 12px 40px rgba(212,175,55,0.4); z-index: 100;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-lite));
+    color: var(--ink); padding: 12px 20px; border-radius: 100px;
+    font-weight: 700; font-size: 13px;
+    box-shadow: 0 16px 40px rgba(212,175,55,0.5); z-index: 100;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    letter-spacing: 0.3px; display: flex; align-items: center; gap: 8px;
   }
   .achievement.show { transform: translateX(-50%) translateY(0); }
 
   /* Nav */
   .nav-buttons { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 24px; }
   .btn-nav {
-    background: transparent; border: none; color: var(--slate-light);
+    background: transparent; border: none; color: var(--slate-lite);
     font-family: inherit; font-size: 14px; cursor: pointer; font-weight: 600;
   }
   .btn-nav:hover { color: var(--white); }
   .btn-nav:disabled { opacity: 0.25; cursor: not-allowed; }
 
-  /* ─── Contact form (before reveal) ─── */
-  .lock-hero { text-align: center; padding: 30px 20px 20px; }
-  .lock-badge {
-    display: inline-block; padding: 6px 14px; border: 1px solid var(--gold);
-    background: rgba(212,175,55,0.1); color: var(--gold);
-    border-radius: 100px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-    font-weight: 700; margin-bottom: 20px;
-  }
-  .lock-emoji { font-size: 56px; margin-bottom: 16px; display: block; }
-  .lock-title { font-weight: 800; font-size: clamp(26px, 4vw, 36px); margin-bottom: 12px; letter-spacing: -0.5px; }
-  .lock-sub { color: var(--slate-light); font-size: 15px; max-width: 460px; margin: 0 auto 32px; line-height: 1.5; }
-
-  .score-preview {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.06); border-radius: 16px;
-    padding: 24px; text-align: center; margin-bottom: 24px;
-  }
-  .score-blur-num {
-    font-weight: 800; font-size: 52px; color: var(--gold); line-height: 1;
-    filter: blur(14px); user-select: none;
-  }
-  .score-blur-lbl { color: var(--slate-light); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-top: 12px; font-weight: 600; }
+  /* Contact (unlock) */
+  .unlock-hero { text-align: center; padding: 24px 20px 12px; }
+  .unlock-emoji { font-size: 48px; margin-bottom: 12px; display: block; animation: pop 0.5s; }
+  .unlock-title { font-weight: 800; font-size: clamp(24px, 4vw, 32px); margin-bottom: 10px; letter-spacing: -0.5px; }
+  .unlock-sub { color: var(--slate-lite); font-size: 15px; max-width: 460px; margin: 0 auto 24px; line-height: 1.5; }
 
   .form-block {
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 20px; padding: 28px; margin-bottom: 20px;
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    border-radius: 20px; padding: 26px; margin-bottom: 20px;
   }
   .form-row { display: flex; flex-direction: column; margin-bottom: 18px; }
   .form-row label {
-    font-size: 11px; color: var(--slate-light); text-transform: uppercase;
+    font-size: 11px; color: var(--slate-lite); text-transform: uppercase;
     letter-spacing: 1.5px; margin-bottom: 8px; font-weight: 700;
   }
   .form-row input {
@@ -265,120 +259,154 @@
   }
   .form-row input:focus { border-color: var(--gold); background: rgba(0,0,0,0.4); }
   .form-row input::placeholder { color: rgba(255,255,255,0.3); }
-  .consent {
-    display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px;
-    font-size: 12px; color: var(--slate-light); line-height: 1.5;
-  }
-  .consent input { margin-top: 3px; accent-color: var(--gold); }
-  .consent a { color: var(--gold); text-decoration: none; }
-  .trust-strip {
-    text-align: center; color: var(--slate-light); font-size: 12px; margin-top: 16px;
-  }
+  .form-row input.invalid { border-color: var(--danger); }
   .form-err {
-    color: var(--danger); font-size: 12px; margin-top: 6px; min-height: 16px;
+    color: var(--danger); font-size: 12px; margin-top: 6px; min-height: 14px;
     opacity: 0; transform: translateY(-4px); transition: all 0.2s;
   }
   .form-err.show { opacity: 1; transform: translateY(0); }
-  .form-row input.invalid { border-color: var(--danger); }
+  .consent {
+    display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px;
+    font-size: 12px; color: var(--slate-lite); line-height: 1.5;
+  }
+  .consent input { margin-top: 3px; accent-color: var(--gold); }
 
-  /* ─── Reveal loader ─── */
+  /* Reveal loader */
   .reveal-anim { text-align: center; padding: 100px 20px; }
   .reveal-spinner {
-    width: 72px; height: 72px; margin: 0 auto 24px; position: relative;
-  }
-  .reveal-spinner::before {
-    content: ''; position: absolute; inset: 0; border-radius: 50%;
-    border: 3px solid rgba(212,175,55,0.15); border-top-color: var(--gold);
-    animation: spin 1s linear infinite;
+    width: 60px; height: 60px; margin: 0 auto 20px; position: relative;
+    border-radius: 50%; border: 3px solid rgba(212,175,55,0.15); border-top-color: var(--gold);
+    animation: spin 0.8s linear infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .reveal-text { font-size: 16px; color: var(--slate-light); font-weight: 500; }
+  .reveal-text { font-size: 15px; color: var(--slate-lite); font-weight: 500; }
 
-  /* ─── Result ─── */
-  .result-hero { text-align: center; padding: 30px 20px 20px; }
-  .result-badge {
-    display: inline-block; padding: 6px 14px; border-radius: 100px;
-    font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700;
+  /* Result */
+  .result-hero { text-align: center; padding: 24px 20px 16px; }
+  .result-tier-chip {
+    display: inline-block; padding: 5px 14px; border-radius: 100px;
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700;
     margin-bottom: 20px;
   }
-  .badge-green { background: rgba(74,222,128,0.15); color: var(--success); border: 1px solid rgba(74,222,128,0.35); }
-  .badge-yellow { background: rgba(251,191,36,0.15); color: var(--warning); border: 1px solid rgba(251,191,36,0.35); }
-  .badge-orange { background: rgba(248,113,113,0.15); color: var(--warning); border: 1px solid rgba(251,191,36,0.35); }
-  .badge-red { background: rgba(248,113,113,0.15); color: var(--danger); border: 1px solid rgba(248,113,113,0.35); }
+  .tier-green { background: rgba(74,222,128,0.15); color: var(--success); border: 1px solid rgba(74,222,128,0.35); }
+  .tier-yellow { background: rgba(251,191,36,0.15); color: var(--warning); border: 1px solid rgba(251,191,36,0.35); }
+  .tier-orange { background: rgba(248,113,113,0.15); color: var(--warning); border: 1px solid rgba(251,191,36,0.35); }
+  .tier-red { background: rgba(248,113,113,0.15); color: var(--danger); border: 1px solid rgba(248,113,113,0.35); }
 
-  .score-circle { width: 220px; height: 220px; margin: 20px auto 32px; position: relative; }
-  .score-circle svg { transform: rotate(-90deg); filter: drop-shadow(0 4px 24px var(--gold-glow)); }
-  .score-track { stroke: rgba(255,255,255,0.08); fill: none; stroke-width: 12; }
-  .score-fill { fill: none; stroke: var(--gold); stroke-width: 12; stroke-linecap: round;
+  .score-viz { width: 240px; height: 240px; margin: 20px auto 32px; position: relative; }
+  .score-viz svg { transform: rotate(-90deg); filter: drop-shadow(0 4px 24px var(--gold-glow)); }
+  .score-track { stroke: rgba(255,255,255,0.06); fill: none; stroke-width: 12; }
+  .score-fill { fill: none; stroke: url(#scoreGrad); stroke-width: 12; stroke-linecap: round;
     transition: stroke-dashoffset 1.8s cubic-bezier(0.4, 0, 0.2, 1); }
   .score-text {
     position: absolute; inset: 0; display: flex; flex-direction: column;
     align-items: center; justify-content: center;
   }
-  .score-num { font-weight: 800; font-size: 72px; line-height: 1; color: var(--gold); letter-spacing: -2px; }
-  .score-max { font-size: 10px; color: var(--slate-light); margin-top: 6px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; }
+  .score-num {
+    font-weight: 800; font-size: 88px; line-height: 1; color: var(--gold);
+    letter-spacing: -3px; font-family: 'JetBrains Mono', monospace;
+  }
+  .score-max { font-size: 10px; color: var(--slate-lite); margin-top: 8px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; }
 
-  .result-title { font-weight: 800; font-size: clamp(24px, 3.5vw, 34px); text-align: center; margin-bottom: 12px; line-height: 1.2; letter-spacing: -0.5px; }
-  .result-sub { text-align: center; color: var(--slate-light); font-size: 15px; margin-bottom: 36px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.5; }
+  .result-title { font-weight: 800; font-size: clamp(22px, 3.5vw, 30px); text-align: center; margin-bottom: 10px; line-height: 1.25; letter-spacing: -0.4px; max-width: 620px; margin-left: auto; margin-right: auto; }
+  .result-sub { text-align: center; color: var(--slate-lite); font-size: 14px; margin-bottom: 36px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.5; }
 
   .card-block {
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 20px; padding: 28px; margin-bottom: 20px;
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    border-radius: 20px; padding: 26px; margin-bottom: 18px;
   }
   .card-title {
-    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
-    color: var(--slate-light); margin-bottom: 20px; font-weight: 700;
-    padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--slate-lite); margin-bottom: 20px; font-weight: 700;
+    padding-bottom: 12px; border-bottom: 1px solid var(--border);
   }
-  .card-block { padding: 28px 32px; }
 
-  .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .profile-item { display: flex; flex-direction: column; }
-  .profile-lbl { font-size: 11px; color: var(--slate-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; font-weight: 600; }
-  .profile-val { color: var(--white); font-weight: 600; font-size: 14px; }
+  /* Before/After — the killer viz */
+  .ba-table {
+    display: grid; grid-template-columns: 1.4fr 1fr auto 1fr;
+    gap: 0; align-items: center;
+    background: rgba(0,0,0,0.15); border-radius: 14px; overflow: hidden;
+  }
+  .ba-head { padding: 12px 14px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--slate-lite); font-weight: 700; border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.2); }
+  .ba-head.hnow { text-align: right; }
+  .ba-head.hnext { text-align: center; color: var(--gold); }
+  .ba-row-label { padding: 14px; font-size: 13px; font-weight: 600; color: var(--white); border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .ba-row-now { padding: 14px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 600; color: var(--slate-lite); border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .ba-arrow { padding: 14px 4px; color: var(--gold); font-size: 14px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .ba-row-next { padding: 14px; font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700; color: var(--gold); border-bottom: 1px solid rgba(255,255,255,0.04); text-align: center; }
+  .ba-row:last-child > * { border-bottom: none; }
+  .ba-note { color: var(--slate-lite); font-size: 11px; margin-top: 12px; text-align: center; letter-spacing: 0.3px; }
 
-  .recs { display: flex; flex-direction: column; gap: 18px; }
-  .rec { display: flex; gap: 14px; align-items: flex-start; }
-  .rec-num {
-    width: 30px; height: 30px; border-radius: 50%; background: rgba(212,175,55,0.15);
-    color: var(--gold); display: flex; align-items: center; justify-content: center;
+  /* Actions list */
+  .actions { display: flex; flex-direction: column; gap: 16px; }
+  .action { display: flex; gap: 14px; align-items: flex-start; }
+  .action-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(212,175,55,0.15); color: var(--gold);
+    display: flex; align-items: center; justify-content: center;
     font-weight: 800; flex-shrink: 0; font-size: 13px;
   }
-  .rec-text { line-height: 1.5; font-size: 14px; }
+  .action-text { line-height: 1.5; font-size: 14px; }
 
-  .forecast-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  .forecast-item { text-align: center; padding: 18px 10px; background: rgba(0,0,0,0.25); border-radius: 12px; }
-  .forecast-lbl { font-size: 10px; color: var(--slate-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; font-weight: 600; }
-  .forecast-val { font-weight: 800; font-size: 22px; color: var(--gold); }
-  .forecast-sub { font-size: 11px; color: var(--slate-light); margin-top: 4px; }
+  /* Profile grid */
+  .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; }
+  .profile-item { display: flex; flex-direction: column; }
+  .profile-lbl { font-size: 10px; color: var(--slate-lite); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; font-weight: 600; }
+  .profile-val { color: var(--white); font-weight: 600; font-size: 13px; }
 
-  .cta-block { text-align: center; padding: 30px 20px; }
-  .cta-title { font-weight: 800; font-size: clamp(20px, 3vw, 28px); margin-bottom: 10px; line-height: 1.3; }
-  .cta-sub { color: var(--slate-light); margin-bottom: 24px; font-size: 14px; }
-  .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-
-  /* ─── Footer ─── */
-  .footer {
-    padding: 24px 32px; text-align: center; color: var(--slate-light); font-size: 12px;
-    border-top: 1px solid rgba(255,255,255,0.05); margin-top: 40px;
+  /* Lead magnet */
+  .magnet-card {
+    background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(30,58,138,0.15));
+    border: 1px solid rgba(212,175,55,0.3); border-radius: 20px;
+    padding: 28px; position: relative; overflow: hidden;
   }
-  .footer a { color: var(--slate-light); text-decoration: none; margin: 0 10px; }
+  .magnet-card::before {
+    content: ''; position: absolute; top: -80px; right: -80px; width: 240px; height: 240px;
+    background: radial-gradient(circle, rgba(212,175,55,0.15), transparent 70%);
+    pointer-events: none;
+  }
+  .magnet-tag {
+    display: inline-block; padding: 4px 10px; border-radius: 6px;
+    background: var(--gold); color: var(--ink); font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-bottom: 14px;
+  }
+  .magnet-title { font-size: 22px; font-weight: 800; line-height: 1.25; margin-bottom: 10px; letter-spacing: -0.3px; }
+  .magnet-sub { color: var(--slate-lite); font-size: 14px; margin-bottom: 20px; line-height: 1.55; }
+  .magnet-meta { display: flex; gap: 16px; flex-wrap: wrap; color: var(--slate-lite); font-size: 12px; margin-bottom: 22px; }
+  .magnet-meta span::before { content: '✓ '; color: var(--gold); }
+
+  /* Discovery block */
+  .discovery-card {
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    border-radius: 20px; padding: 24px; text-align: center; margin-top: 18px;
+  }
+  .discovery-title { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+  .discovery-sub { color: var(--slate-lite); font-size: 13px; margin-bottom: 20px; }
+
+  /* Footer */
+  .footer {
+    padding: 32px 24px 12px; text-align: center; color: var(--slate-lite); font-size: 12px;
+    border-top: 1px solid var(--border); margin-top: 40px;
+  }
+  .footer a { color: var(--slate-lite); text-decoration: none; margin: 0 10px; }
   .footer a:hover { color: var(--gold); }
 
   /* Mobile */
   @media (max-width: 640px) {
-    .header { padding: 14px 20px; }
-    .brand-name { font-size: 10px; }
-    .splash-logo { width: 110px; height: 110px; }
-    .splash-hero { padding: 20px 4px 20px; }
+    .header { padding: 12px 18px; }
+    .brand-name { font-size: 9px; }
+    .splash-logo { width: 80px; height: 80px; margin: 12px auto 20px; }
+    .value-stack { padding: 20px 18px; }
     .card-block, .form-block { padding: 22px 18px; }
-    .forecast-grid { grid-template-columns: 1fr; }
-    .cta-buttons { flex-direction: column; }
-    .btn { width: 100%; justify-content: center; }
-    .splash-meta { gap: 20px; }
-    .meta-val { font-size: 24px; }
     .profile-grid { grid-template-columns: 1fr; }
-    .progress-wrap { padding: 0 20px; }
+    .btn { width: 100%; justify-content: center; }
+    .ba-table { grid-template-columns: 1.2fr auto auto auto; }
+    .ba-row-now, .ba-row-next { padding: 12px 8px; font-size: 13px; }
+    .ba-row-label { padding: 12px 10px; font-size: 12px; }
+    .ba-head { padding: 10px 8px; font-size: 9px; }
+    .discovery-card { padding: 22px 18px; }
+    .magnet-card { padding: 24px 20px; }
+    .magnet-title { font-size: 18px; }
   }
 </style>
 </head>
@@ -390,7 +418,7 @@
 <!-- Header -->
 <header class="header">
   <a href="/" class="brand">
-    <img src="rodychi_logo.png" alt="Rodychi" onerror="this.style.display='none'">
+    <img src="https://rodychi.media/rodychi-fit-score/rodychi_logo.png" alt="Rodychi" onerror="this.src='rodychi_logo.png'">
     <span class="brand-name">RODYCHI · FIT SCORE</span>
   </a>
   <a href="https://rodychi.media" class="header-cta">rodychi.media →</a>
@@ -398,29 +426,61 @@
 
 <!-- Progress -->
 <div class="progress-wrap" id="progressWrap" style="display:none">
-  <div class="progress-sections" id="progressSections"></div>
-  <div class="progress-meta">
-    <span id="progressLabel"></span>
-    <span class="gold" id="progressCount"></span>
+  <div class="level-bar">
+    <div class="level-icon" id="levelIcon">1</div>
+    <div class="level-text">
+      <div class="level-label">Рівень <span id="levelNum">1</span> з 5</div>
+      <div class="level-name" id="levelName">Хто ви</div>
+    </div>
+    <div class="level-count" id="levelCount">0/12</div>
   </div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 </div>
 
 <!-- ═══ SPLASH ═══ -->
 <section class="screen active" id="screenSplash">
   <div class="container">
-    <div class="splash">
-      <div class="splash-logo"><img src="rodychi_logo.png" alt="Rodychi" onerror="this.style.display='none'"></div>
-      <h1 class="splash-title">Наскільки <span class="gold">ваш бізнес</span><br>готовий рости в Telegram?</h1>
-      <p class="splash-sub">
-        12 питань — і ви отримаєте персональний дашборд з оцінкою потенціалу
-        та планом дій на 60 днів.
-      </p>
-      <div class="splash-meta">
-        <div class="meta-item"><div class="meta-val" data-count="12" data-suffix="">0</div><div class="meta-lbl">питань</div></div>
-        <div class="meta-item"><div class="meta-val" data-count="5" data-suffix=" хв">0</div><div class="meta-lbl">часу</div></div>
-        <div class="meta-item"><div class="meta-val" data-count="400" data-suffix="+">0</div><div class="meta-lbl">клієнтів у базі</div></div>
+    <img src="https://rodychi.media/rodychi-fit-score/rodychi_logo.png" alt="Rodychi" class="splash-logo" onerror="this.src='rodychi_logo.png'">
+
+    <h1 class="splash-title">Гра-аудит для <span class="gold">вашого бізнесу</span> в Telegram</h1>
+    <p class="splash-sub">
+      Дайте нам 5 хвилин — і ви отримаєте те, за що агенції беруть $500.
+      Особистий план росту, розроблений під ваш бізнес і нішу.
+    </p>
+
+    <div class="value-stack">
+      <div class="value-title">🎁 Що ви отримаєте безкоштовно</div>
+      <div class="value-list">
+        <div class="value-row">
+          <div class="value-icon">🎯</div>
+          <div class="value-text"><b>Персональний Fit Score 0-100</b><span>Оцінка готовності вашого бізнесу до Telegram-росту</span></div>
+        </div>
+        <div class="value-row">
+          <div class="value-icon">📊</div>
+          <div class="value-text"><b>Прогноз виторгу за 60 днів</b><span>Порівняльна таблиця «до / після» з реальними цифрами</span></div>
+        </div>
+        <div class="value-row">
+          <div class="value-icon">💡</div>
+          <div class="value-text"><b>3 конкретні дії саме для вас</b><span>Не «зробіть контент-план» — а точний план під вашу нішу</span></div>
+        </div>
+        <div class="value-row">
+          <div class="value-icon">📥</div>
+          <div class="value-text"><b>Персональний playbook — 14-16 сторінок</b><span>Готовий гайд під ваш тип бізнесу з нашими кейсами і шаблонами</span></div>
+        </div>
+        <div class="value-row">
+          <div class="value-icon">🎁</div>
+          <div class="value-text"><b>Пріоритетний слот на discovery-дзвінок</b><span>30 хвилин з засновником Rodychi — за умови високого score</span></div>
+        </div>
       </div>
-      <button class="btn btn-primary btn-hero" onclick="startQuiz()">Розпочати аудит <span class="arrow">→</span></button>
+    </div>
+
+    <div class="cta-hero">
+      <button class="btn btn-primary btn-hero" onclick="startQuiz()">Розпочати гру-аудит <span class="arrow">→</span></button>
+      <div class="trust-badges">
+        <span>12 питань</span><span class="dot"></span>
+        <span>5 хвилин</span><span class="dot"></span>
+        <span>Без реєстрації</span>
+      </div>
     </div>
   </div>
 </section>
@@ -430,7 +490,6 @@
   <div class="container">
     <div class="q-hero">
       <span class="q-emoji" id="qEmoji"></span>
-      <div class="q-section" id="qSection"></div>
       <h2 class="q-title" id="qTitle"></h2>
       <p class="q-hint" id="qHint"></p>
     </div>
@@ -442,45 +501,40 @@
   </div>
 </section>
 
-<!-- ═══ CONTACT (LOCK) ═══ -->
+<!-- ═══ CONTACT ═══ -->
 <section class="screen" id="screenContact">
   <div class="container">
-    <div class="lock-hero">
-      <h2 class="lock-title">Куди відправити ваш результат?</h2>
-      <p class="lock-sub">
-        Ми надішлемо повний звіт з дашбордом на вашу пошту або в Telegram.
-        Без спаму — тільки ваш результат і, за бажанням, discovery-дзвінок.
+    <div class="unlock-hero">
+      <span class="unlock-emoji">🔓</span>
+      <h2 class="unlock-title">Куди відправити ваш результат?</h2>
+      <p class="unlock-sub">
+        Надішлемо повний звіт з дашбордом і персональним playbook на пошту або в Telegram.
+        Без спаму — тільки корисне.
       </p>
     </div>
-
-    <div class="score-preview">
-      <div class="score-blur-num" id="lockScoreNum">78</div>
-      <div class="score-blur-lbl">Ваш Fit Score</div>
-    </div>
-
     <div class="form-block">
       <div class="form-row">
         <label for="fName">Ім'я</label>
-        <input type="text" id="fName" placeholder="Данил" autocomplete="given-name" oninput="validateForm()" onblur="validateField('name')">
+        <input type="text" id="fName" placeholder="Данил" oninput="validateForm()" onblur="validateField('name')">
         <div class="form-err" id="errName"></div>
       </div>
       <div class="form-row">
         <label for="fContact">Telegram @username або email</label>
-        <input type="text" id="fContact" placeholder="@username або name@company.com" autocomplete="email" oninput="validateForm()" onblur="validateField('contact')">
+        <input type="text" id="fContact" placeholder="@username або name@company.com" oninput="validateForm()" onblur="validateField('contact')">
         <div class="form-err" id="errContact"></div>
       </div>
       <div class="form-row">
-        <label for="fCompany">Назва бізнесу або каналу <span style="color:var(--slate-light);text-transform:none;letter-spacing:0">(необов'язково)</span></label>
-        <input type="text" id="fCompany" placeholder="Наприклад: Rodychi Media" autocomplete="organization">
+        <label for="fCompany">Назва бізнесу або каналу <span style="color:var(--slate-lite);text-transform:none;letter-spacing:0">(необов'язково)</span></label>
+        <input type="text" id="fCompany" placeholder="Наприклад: Rodychi Media">
       </div>
       <label class="consent">
         <input type="checkbox" id="fConsent" checked>
         <span>Погоджуюсь на обробку контактів для отримання результатів аудиту.</span>
       </label>
-      <button class="btn btn-primary btn-full btn-lg" id="submitBtn" onclick="submitContact()" disabled>Надіслати мені результат →</button>
-      <div class="trust-strip">
-        <span>Ваші дані захищені та не передаються третім особам</span>
-      </div>
+      <button class="btn btn-primary btn-full" id="submitBtn" onclick="submitContact()" disabled>Розблокувати мій результат →</button>
+    </div>
+    <div class="trust-badges" style="margin-top:8px">
+      <span>🔒 Захищений канал</span><span class="dot"></span><span>Не передаємо третім особам</span>
     </div>
   </div>
 </section>
@@ -490,30 +544,27 @@
   <div class="container">
     <div class="reveal-anim">
       <div class="reveal-spinner"></div>
-      <div class="reveal-text" id="revealText">Готуємо ваш дашборд...</div>
+      <div class="reveal-text">Складаємо ваш результат…</div>
     </div>
   </div>
 </section>
 
 <!-- ═══ RESULT ═══ -->
 <section class="screen" id="screenResult">
-  <div class="container">
-
-    <!-- Hero score -->
+  <div class="wide-container">
     <div class="result-hero">
-      <span class="result-badge" id="resultBadge"></span>
-      <div class="score-circle">
-        <svg width="220" height="220" viewBox="0 0 220 220">
+      <span class="result-tier-chip" id="tierChip"></span>
+      <div class="score-viz">
+        <svg width="240" height="240" viewBox="0 0 240 240">
           <defs>
             <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#D4AF37"/>
-              <stop offset="100%" stop-color="#F4E1A1"/>
+              <stop offset="100%" stop-color="#F0D06B"/>
             </linearGradient>
           </defs>
-          <circle class="score-track" cx="110" cy="110" r="95"></circle>
-          <circle class="score-fill" cx="110" cy="110" r="95"
-                  stroke="url(#scoreGrad)"
-                  stroke-dasharray="596.9" stroke-dashoffset="596.9" id="scoreArc"></circle>
+          <circle class="score-track" cx="120" cy="120" r="104"></circle>
+          <circle class="score-fill" cx="120" cy="120" r="104"
+                  stroke-dasharray="653.4" stroke-dashoffset="653.4" id="scoreArc"></circle>
         </svg>
         <div class="score-text">
           <div class="score-num" id="scoreNum">0</div>
@@ -524,32 +575,34 @@
       <p class="result-sub" id="resultSub"></p>
     </div>
 
-    <!-- Profile -->
     <div class="card-block">
       <div class="card-title">Ваш профіль</div>
       <div class="profile-grid" id="profileList"></div>
     </div>
 
-    <!-- Recs -->
     <div class="card-block">
-      <div class="card-title">Рекомендації</div>
-      <div class="recs" id="recsList"></div>
+      <div class="card-title">Що можливо за 60 днів</div>
+      <div class="ba-table" id="baTable"></div>
+      <div class="ba-note">Прогноз побудовано на середніх результатах наших клієнтів у вашій ніші за 2025-2026.</div>
     </div>
 
-    <!-- Forecast -->
     <div class="card-block">
-      <div class="card-title">Що можемо зробити за 60 днів</div>
-      <div class="forecast-grid" id="forecastGrid"></div>
+      <div class="card-title">Пріоритетні кроки</div>
+      <div class="actions" id="actionsList"></div>
     </div>
 
-    <!-- CTA -->
-    <div class="cta-block">
-      <h3 class="cta-title" id="ctaTitle"></h3>
-      <p class="cta-sub" id="ctaSub"></p>
-      <div class="cta-buttons">
-        <a href="https://t.me/tviy_rodych" class="btn btn-primary">Забронювати дзвінок →</a>
-        <a href="https://rodychi.media" class="btn btn-ghost">Дивитись кейси</a>
-      </div>
+    <div class="magnet-card">
+      <span class="magnet-tag">🎁 ВАШ БОНУС</span>
+      <h3 class="magnet-title" id="magnetTitle"></h3>
+      <p class="magnet-sub" id="magnetSub"></p>
+      <div class="magnet-meta" id="magnetMeta"></div>
+      <a class="btn btn-primary btn-full" id="magnetBtn" href="#" target="_blank">Забрати playbook у Telegram →</a>
+    </div>
+
+    <div class="discovery-card" id="discoveryCard">
+      <div class="discovery-title" id="discoveryTitle"></div>
+      <div class="discovery-sub" id="discoverySub"></div>
+      <a class="btn btn-primary" id="discoveryBtn" href="https://t.me/tviy_rodych" target="_blank">Забронювати дзвінок →</a>
     </div>
 
   </div>
@@ -557,7 +610,7 @@
 
 <footer class="footer">
   <div>© 2026 Rodychi Media · Telegram-агенція повного циклу</div>
-  <div style="margin-top:10px">
+  <div style="margin-top:8px">
     <a href="https://rodychi.media">Сайт</a>·
     <a href="https://t.me/rdch_media">Telegram</a>·
     <a href="https://instagram.com/rodychi">Instagram</a>
@@ -568,18 +621,58 @@
 
 <script>
 // ══════════ CONFIG ══════════
-const CONFIG = {
-  submitEndpoint: null,   // e.g. Zapier / Make webhook
-  botWebhook: null,       // e.g. rodychi bot webhook
+const CONFIG = { submitEndpoint: null, botWebhook: null };
+
+// ══════════ LEAD MAGNETS ══════════
+const MAGNETS = {
+  expert: {
+    url: 'https://t.me/rdchbonus_bot?start=expert',
+    title: 'Як експерту заробляти $10-25K/міс у Telegram',
+    sub: 'Playbook на 16 сторінок для психологів, юристів, коучів, нутриціологів. План міграції з Instagram по тижнях + прайсинг преміум-програм.',
+    meta: ['16 сторінок', 'PDF + бонус-шаблони', 'Кейс психолога: $14K за 4 міс']
+  },
+  local: {
+    url: 'https://t.me/rdchbonus_bot?start=business',
+    title: 'Як локальному бізнесу знизити CAC у 5 разів',
+    sub: 'Зв\'язка Telegram + Meta для салонів, клінік, ресторанів, фітнес-студій. План на 60 днів і множення LTV у 3-5 разів.',
+    meta: ['15 сторінок', 'PDF + шаблон бота', 'Кейс Elen Studio: +307% виторгу']
+  },
+  school: {
+    url: 'https://t.me/rdchbonus_bot?start=school',
+    title: 'Друга воронка для онлайн-школи: +30-50% доходу',
+    sub: 'Retention випускників, ком\'юніті-канал, преміум-продукти. Готова архітектура другої воронки з 4 способами монетизації.',
+    meta: ['14 сторінок', 'PDF + чек-лист', 'Кейс школи: +35% доходу']
+  },
+  ecom: {
+    url: 'https://t.me/rdchbonus_bot?start=business',
+    title: 'Telegram для e-commerce: +58% repeat purchase',
+    sub: 'Як побудувати loyalty-канал, ексклюзивні дропи для підписників, автоворонки продажу. Meta залучає, TG повертає.',
+    meta: ['15 сторінок', 'PDF + бот-flow', 'Кейс DTC-бренду: +58% повторних']
+  },
+  b2b: {
+    url: 'https://t.me/rdchbonus_bot?start=expert',
+    title: 'B2B-канал засновника: як зробити $8K MRR за 90 днів',
+    sub: 'Thought leadership + закритий чат B2B-директорів + автоворонка demo. Готова система для B2B і SaaS.',
+    meta: ['16 сторінок', 'PDF + шаблон-контент', 'Кейс HR-tech: CAC $340 → $95']
+  },
+  media: {
+    url: 'https://t.me/rdchbonus_bot?start=business',
+    title: 'Монетизація медіа-каналу: $2K → $14K/міс за рік',
+    sub: 'Як виростити аудиторію в 4 рази і побудувати sales-воронку для рекламодавців. З реального кейсу нашого медіа.',
+    meta: ['15 сторінок', 'PDF + медіа-кіт', 'Кейс новинного каналу: 4× ріст']
+  },
+  other: {
+    url: 'https://t.me/rdchbonus_bot?start=business',
+    title: 'Універсальний Telegram Growth Playbook',
+    sub: 'Огляд усіх наших підходів: канал, бот, реклама, монетизація. Ви обираєте що застосувати першим у вашій ніші.',
+    meta: ['15 сторінок', 'PDF + чек-лист', 'Придатний для будь-якої ніші']
+  }
 };
 
 // ══════════ QUESTIONS ══════════
 const QUESTIONS = [
-  // === Секція 1: Хто ти (3) ===
-  {
-    section: 'Хто ти', sectionIdx: 0, emoji: '👋',
-    title: 'Який у вас тип бізнесу?',
-    key: 'businessType', type: 'single', weight: 25,
+  { section: 'Хто ви', sectionIdx: 0, emoji: '👋',
+    title: 'Який у вас тип бізнесу?', key: 'businessType', type: 'single', weight: 25,
     options: [
       { v: 'expert',   l: 'Експерт / особистий бренд',       e: '🧑‍💼', s: 25 },
       { v: 'local',    l: 'Локальний бізнес (салон, клініка)', e: '📍', s: 25 },
@@ -587,131 +680,94 @@ const QUESTIONS = [
       { v: 'ecom',     l: 'E-commerce / товарка / ритейл',     e: '🛍️', s: 20 },
       { v: 'media',    l: 'Медіа / контент-проєкт',            e: '📰', s: 15 },
       { v: 'b2b',      l: 'B2B / SaaS / IT-продукт',           e: '💻', s: 20 },
-      { v: 'other',    l: 'Інше',                              e: '✨', s: 10 }
-    ]
-  },
-  {
-    section: 'Хто ти', sectionIdx: 0, emoji: '🎯',
-    title: 'Яка ваша ніша?',
-    key: 'niche', type: 'single',
+      { v: 'other',    l: 'Інше',                              e: '✨', s: 10 } ] },
+  { section: 'Хто ви', sectionIdx: 0, emoji: '🎯',
+    title: 'Яка ваша ніша?', key: 'niche', type: 'single',
     options: [
-      { v: 'psy',      l: 'Психологія / коучинг',      e: '🧠' },
-      { v: 'legal',    l: 'Юридика / право',            e: '⚖️' },
-      { v: 'med',      l: 'Медицина / стоматологія',   e: '🩺' },
-      { v: 'beauty',   l: "Б'юті / краса / естетика", e: '💄' },
-      { v: 'fitness',  l: "Фітнес / здоров'я",         e: '🏋️' },
-      { v: 'edu',      l: 'Освіта / IT-школи',          e: '📚' },
-      { v: 'food',     l: "Ресторан / кав'ярня",       e: '☕' },
-      { v: 'fashion',  l: 'Одяг / аксесуари',           e: '👗' },
-      { v: 'realestate', l: 'Нерухомість',              e: '🏢' },
-      { v: 'tech',     l: 'IT / SaaS / стартап',        e: '🚀' },
-      { v: 'consulting', l: 'Консалтинг / фінанси',     e: '📊' },
-      { v: 'other',    l: 'Інше',                       e: '✨' }
-    ]
-  },
-  {
-    section: 'Хто ти', sectionIdx: 0, emoji: '💰',
+      { v: 'psy', l: 'Психологія / коучинг', e: '🧠' },
+      { v: 'legal', l: 'Юридика / право', e: '⚖️' },
+      { v: 'med', l: 'Медицина / стоматологія', e: '🩺' },
+      { v: 'beauty', l: "Б'юті / краса / естетика", e: '💄' },
+      { v: 'fitness', l: "Фітнес / здоров'я", e: '🏋️' },
+      { v: 'edu', l: 'Освіта / IT-школи', e: '📚' },
+      { v: 'food', l: "Ресторан / кав'ярня", e: '☕' },
+      { v: 'fashion', l: 'Одяг / аксесуари', e: '👗' },
+      { v: 'realestate', l: 'Нерухомість', e: '🏢' },
+      { v: 'tech', l: 'IT / SaaS / стартап', e: '🚀' },
+      { v: 'consulting', l: 'Консалтинг / фінанси', e: '📊' },
+      { v: 'other', l: 'Інше', e: '✨' } ] },
+  { section: 'Хто ви', sectionIdx: 0, emoji: '💰',
     title: 'Який ваш середній чек за одну покупку/послугу?',
-    hint: 'Сума однієї транзакції',
-    key: 'avgCheck', type: 'single',
+    hint: 'Сума однієї транзакції', key: 'avgCheck', type: 'single', weight: 20,
     options: [
       { v: '<50',     l: 'До $50',              e: '💵', s: 8 },
       { v: '50-200',  l: '$50 — $200',           e: '💵', s: 15 },
       { v: '200-1k',  l: '$200 — $1 000',        e: '💰', s: 20 },
       { v: '1k-5k',   l: '$1 000 — $5 000',      e: '💎', s: 20 },
       { v: '5k+',     l: 'Більше $5 000',        e: '👑', s: 18 },
-      { v: 'depends', l: 'Залежить від продукту', e: '🎲', s: 12 }
-    ], weight: 20
-  },
-  // === Секція 2: Де ти зараз (3) ===
-  {
-    section: 'Де ти зараз', sectionIdx: 1, emoji: '📱',
-    title: 'На яких платформах ви вже присутні?',
-    hint: 'Оберіть усі активні платформи',
+      { v: 'depends', l: 'Залежить від продукту', e: '🎲', s: 12 } ] },
+  { section: 'Де ви зараз', sectionIdx: 1, emoji: '📱',
+    title: 'На яких платформах ви вже присутні?', hint: 'Оберіть усі активні',
     key: 'platforms', type: 'multi',
     options: [
-      { v: 'instagram', l: 'Instagram',              e: '📸' },
-      { v: 'tiktok',    l: 'TikTok',                 e: '🎵' },
-      { v: 'facebook',  l: 'Facebook',               e: '👥' },
-      { v: 'telegram',  l: 'Telegram (канал/бот)',   e: '✈️' },
-      { v: 'youtube',   l: 'YouTube',                e: '▶️' },
-      { v: 'threads',   l: 'Threads',                e: '@' },
-      { v: 'linkedin',  l: 'LinkedIn',               e: '💼' },
-      { v: 'none',      l: 'Ще жодна не запущена',   e: '🌱' }
-    ]
-  },
-  {
-    section: 'Де ти зараз', sectionIdx: 1, emoji: '📊',
-    title: 'Наскільки велика ваша найбільша аудиторія?',
-    key: 'audienceSize', type: 'single',
+      { v: 'instagram', l: 'Instagram', e: '📸' },
+      { v: 'tiktok',    l: 'TikTok', e: '🎵' },
+      { v: 'facebook',  l: 'Facebook', e: '👥' },
+      { v: 'telegram',  l: 'Telegram (канал/бот)', e: '✈️' },
+      { v: 'youtube',   l: 'YouTube', e: '▶️' },
+      { v: 'threads',   l: 'Threads', e: '@' },
+      { v: 'linkedin',  l: 'LinkedIn', e: '💼' },
+      { v: 'none',      l: 'Ще жодна не запущена', e: '🌱' } ] },
+  { section: 'Де ви зараз', sectionIdx: 1, emoji: '📊',
+    title: 'Наскільки велика ваша найбільша аудиторія?', key: 'audienceSize', type: 'single',
     options: [
-      { v: '0',      l: 'Ще немає аудиторії',        e: '🌱' },
-      { v: '<1k',    l: 'До 1 000',                   e: '🌿' },
-      { v: '1-10k',  l: '1 000 — 10 000',             e: '🌳' },
-      { v: '10-50k', l: '10 000 — 50 000',            e: '🏔️' },
-      { v: '50k+',   l: 'Більше 50 000',              e: '🚀' }
-    ]
-  },
-  {
-    section: 'Де ти зараз', sectionIdx: 1, emoji: '🔀',
-    title: 'Звідки зараз приходять ваші клієнти?',
-    hint: 'Оберіть усі активні джерела',
+      { v: '0', l: 'Ще немає аудиторії', e: '🌱' },
+      { v: '<1k', l: 'До 1 000', e: '🌿' },
+      { v: '1-10k', l: '1 000 — 10 000', e: '🌳' },
+      { v: '10-50k', l: '10 000 — 50 000', e: '🏔️' },
+      { v: '50k+', l: 'Більше 50 000', e: '🚀' } ] },
+  { section: 'Де ви зараз', sectionIdx: 1, emoji: '🔀',
+    title: 'Звідки зараз приходять клієнти?', hint: 'Оберіть усі активні джерела',
     key: 'trafficSource', type: 'multi',
     options: [
-      { v: 'ads',      l: 'Платна реклама (Meta / Google)', e: '🎯' },
-      { v: 'organic',  l: 'Органіка з соцмереж',            e: '🌊' },
-      { v: 'referral', l: 'Сарафан / рекомендації',         e: '🤝' },
-      { v: 'seo',      l: 'SEO / Google-пошук',             e: '🔍' },
-      { v: 'tg',       l: 'Telegram (канал/бот)',           e: '✈️' },
-      { v: 'partners', l: 'Партнери / колаби',              e: '🤜🤛' },
-      { v: 'offline',  l: 'Офлайн / фізична локація',       e: '🏬' },
-      { v: 'none',     l: 'Немає стабільного джерела',      e: '🎲' }
-    ]
-  },
-  // === Секція 3: Що болить (3) ===
-  {
-    section: 'Що болить', sectionIdx: 2, emoji: '🔥',
-    title: 'Які головні болі з маркетингом?',
-    hint: 'Оберіть 1-3 найгостріших',
+      { v: 'ads', l: 'Платна реклама (Meta / Google)', e: '🎯' },
+      { v: 'organic', l: 'Органіка з соцмереж', e: '🌊' },
+      { v: 'referral', l: 'Сарафан / рекомендації', e: '🤝' },
+      { v: 'seo', l: 'SEO / Google-пошук', e: '🔍' },
+      { v: 'tg', l: 'Telegram (канал/бот)', e: '✈️' },
+      { v: 'partners', l: 'Партнери / колаби', e: '🤜🤛' },
+      { v: 'offline', l: 'Офлайн / фізична локація', e: '🏬' },
+      { v: 'none', l: 'Немає стабільного джерела', e: '🎲' } ] },
+  { section: 'Що болить', sectionIdx: 2, emoji: '🔥',
+    title: 'Які головні болі з маркетингом?', hint: 'Оберіть 1-3 найгостріших',
     key: 'pain', type: 'multi', weight: 20,
     options: [
-      { v: 'cpl_grow',       l: 'CPL росте, реклама з місяця в місяць дорожча',  e: '📈', s: 20 },
+      { v: 'cpl_grow',       l: 'CPL росте, реклама дорожча з місяця в місяць',  e: '📈', s: 20 },
       { v: 'no_repeat',      l: 'Клієнти не повертаються за повторною покупкою', e: '🔁', s: 20 },
       { v: 'cannot_scale',   l: 'Не можу масштабуватись без просідання якості',   e: '🚧', s: 20 },
       { v: 'meta_ban',       l: 'Meta блокує акаунти або відключає рекламу',      e: '🚫', s: 20 },
       { v: 'referral_slow',  l: 'Сарафан не встигає покривати мої амбіції',       e: '🐢', s: 15 },
       { v: 'no_attribution', l: 'Не розумію звідки насправді приходять клієнти',  e: '❓', s: 15 },
       { v: 'no_time',        l: 'Немає часу вести соцмережі щодня',                e: '⏳', s: 12 },
-      { v: 'no_content',     l: 'Не знаю про що постити і як робити продажі',       e: '📝', s: 12 }
-    ]
-  },
-  {
-    section: 'Що болить', sectionIdx: 2, emoji: '👥',
-    title: 'Скільки нових клієнтів приходить на місяць?',
-    key: 'newClients', type: 'single',
+      { v: 'no_content',     l: 'Не знаю про що постити і як робити продажі',       e: '📝', s: 12 } ] },
+  { section: 'Що болить', sectionIdx: 2, emoji: '👥',
+    title: 'Скільки нових клієнтів приходить на місяць?', key: 'newClients', type: 'single',
     options: [
-      { v: '<5',    l: 'До 5',      e: '🌱' },
-      { v: '5-20',  l: '5 — 20',    e: '🌿' },
-      { v: '20-100', l: '20 — 100',  e: '🌳' },
-      { v: '100+',  l: 'Більше 100', e: '🏔️' }
-    ]
-  },
-  {
-    section: 'Що болить', sectionIdx: 2, emoji: '💎',
+      { v: '<5', l: 'До 5', e: '🌱' },
+      { v: '5-20', l: '5 — 20', e: '🌿' },
+      { v: '20-100', l: '20 — 100', e: '🌳' },
+      { v: '100+', l: 'Більше 100', e: '🏔️' } ] },
+  { section: 'Що болить', sectionIdx: 2, emoji: '💎',
     title: 'Який LTV (сума за весь час життя клієнта)?',
     hint: 'Скільки в середньому платить один клієнт за весь час співпраці',
     key: 'ltv', type: 'single',
     options: [
-      { v: '<100',     l: 'До $100',           e: '💵' },
-      { v: '100-500',  l: '$100 — $500',       e: '💰' },
-      { v: '500-2k',   l: '$500 — $2 000',     e: '💎' },
-      { v: '2k+',      l: 'Більше $2 000',     e: '👑' },
-      { v: 'unknown',  l: 'Не рахував/-ла',    e: '🤔' }
-    ]
-  },
-  // === Секція 4: Ресурси (2) ===
-  {
-    section: 'Ресурси', sectionIdx: 3, emoji: '💸',
+      { v: '<100', l: 'До $100', e: '💵' },
+      { v: '100-500', l: '$100 — $500', e: '💰' },
+      { v: '500-2k', l: '$500 — $2 000', e: '💎' },
+      { v: '2k+', l: 'Більше $2 000', e: '👑' },
+      { v: 'unknown', l: 'Не рахував/-ла', e: '🤔' } ] },
+  { section: 'Ресурси', sectionIdx: 3, emoji: '💸',
     title: 'Який маркетинг-бюджет ви готові інвестувати на місяць?',
     key: 'budget', type: 'single', weight: 20,
     options: [
@@ -719,116 +775,60 @@ const QUESTIONS = [
       { v: '500-3k',  l: '$500 — $3 000',         e: '🌿', s: 12 },
       { v: '3-10k',   l: '$3 000 — $10 000',      e: '🌳', s: 20 },
       { v: '10-30k',  l: '$10 000 — $30 000',     e: '🏔️', s: 20 },
-      { v: '30k+',    l: 'Більше $30 000',        e: '🚀', s: 20 }
-    ]
-  },
-  {
-    section: 'Ресурси', sectionIdx: 3, emoji: '👥',
-    title: 'Хто веде ваш маркетинг зараз?',
-    key: 'team', type: 'single',
+      { v: '30k+',    l: 'Більше $30 000',        e: '🚀', s: 20 } ] },
+  { section: 'Ресурси', sectionIdx: 3, emoji: '👥',
+    title: 'Хто веде ваш маркетинг зараз?', key: 'team', type: 'single',
     options: [
-      { v: 'self',       l: 'Я сам/-а',                     e: '🧑' },
-      { v: 'inhouse',    l: 'In-house маркетолог',           e: '👔' },
-      { v: 'freelancer', l: 'Фрилансер/-и',                  e: '🎨' },
-      { v: 'agency',     l: 'Агенція',                       e: '🏢' },
-      { v: 'none',       l: 'Ніхто, тільки збираюсь ставити', e: '🌱' }
-    ]
-  },
-  // === Секція 5: Готовність (1) ===
-  {
-    section: 'Готовність', sectionIdx: 4, emoji: '🚀',
-    title: 'Коли ви готові стартувати?',
-    key: 'timing', type: 'single', weight: 15,
+      { v: 'self', l: 'Я сам/-а', e: '🧑' },
+      { v: 'inhouse', l: 'In-house маркетолог', e: '👔' },
+      { v: 'freelancer', l: 'Фрилансер/-и', e: '🎨' },
+      { v: 'agency', l: 'Агенція', e: '🏢' },
+      { v: 'none', l: 'Ніхто, тільки збираюсь ставити', e: '🌱' } ] },
+  { section: 'Готовність', sectionIdx: 4, emoji: '🚀',
+    title: 'Коли ви готові стартувати?', key: 'timing', type: 'single', weight: 15,
     options: [
-      { v: 'now',      l: 'Прямо зараз',            e: '🔥', s: 15 },
-      { v: 'week',     l: 'Через тиждень',          e: '⚡', s: 14 },
-      { v: '1-3',      l: 'Через 1-3 місяці',       e: '📅', s: 10 },
-      { v: '6+',       l: 'Через 6+ місяців',       e: '⏳', s: 5 },
-      { v: 'research', l: 'Просто досліджую тему',  e: '🔍', s: 3 }
-    ]
-  }
+      { v: 'now', l: 'Прямо зараз', e: '🔥', s: 15 },
+      { v: 'week', l: 'Через тиждень', e: '⚡', s: 14 },
+      { v: '1-3', l: 'Через 1-3 місяці', e: '📅', s: 10 },
+      { v: '6+', l: 'Через 6+ місяців', e: '⏳', s: 5 },
+      { v: 'research', l: 'Просто досліджую тему', e: '🔍', s: 3 } ] }
 ];
 
+const SECTION_NAMES = ['Хто ви', 'Де ви зараз', 'Що болить', 'Ресурси', 'Готовність'];
+
 const ACHIEVEMENTS = {
-  1: 'Стартанули 🚀',
-  3: 'Секція 1 закрита 💪',
-  6: 'Половина позаду 🎯',
-  9: 'Фініш близько 🏁',
-  12: 'Готово 🎉'
+  3: { text: 'Секція «Хто ви» пройдена', emoji: '💪' },
+  6: { text: 'Секція «Де ви зараз» пройдена', emoji: '🎯' },
+  9: { text: 'Секція «Що болить» пройдена', emoji: '🔥' },
+  11: { text: 'Секція «Ресурси» пройдена', emoji: '⚡' },
+  12: { text: 'Фініш — усе готово', emoji: '🏆' }
 };
 
-// ══════════ STATE ══════════
-let currentQ = 0;
-let answers = {};
-let quizId = generateId();
-let contactData = null;
+// State
+let currentQ = 0, answers = {}, quizId = Math.random().toString(36).slice(2, 10), contactData = null;
 
-function generateId() { return Math.random().toString(36).slice(2, 10); }
-
-// ══════════ ACHIEVEMENT TOAST ══════════
-function showAchievement(text) {
+// Achievement toast
+function showAchievement(a) {
   const el = document.getElementById('achievement');
-  el.textContent = text;
+  el.innerHTML = `<span>${a.emoji}</span><span>${a.text}</span>`;
   el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), 2200);
+  setTimeout(() => el.classList.remove('show'), 2400);
 }
 
-// ══════════ NAV ══════════
+// Nav
 function startQuiz() {
   document.getElementById('screenSplash').classList.remove('active');
   document.getElementById('progressWrap').style.display = 'block';
   document.getElementById('screenQuestion').classList.add('active');
-  buildProgress();
   renderQuestion();
-}
-
-function buildProgress() {
-  const sections = 5;
-  const el = document.getElementById('progressSections');
-  el.innerHTML = '';
-  for (let i = 0; i < sections; i++) {
-    const dot = document.createElement('div');
-    dot.className = 'progress-dot';
-    dot.dataset.idx = i;
-    el.appendChild(dot);
-  }
-}
-
-function updateProgress() {
-  const q = QUESTIONS[currentQ];
-  const total = QUESTIONS.length;
-
-  // Count questions per section
-  const perSection = [3, 3, 3, 2, 1];
-  const dots = document.querySelectorAll('.progress-dot');
-
-  dots.forEach((dot, idx) => {
-    dot.classList.remove('filled', 'active');
-    if (idx < q.sectionIdx) {
-      dot.classList.add('filled');
-    } else if (idx === q.sectionIdx) {
-      // Compute progress within section
-      let sectionStart = 0;
-      for (let i = 0; i < idx; i++) sectionStart += perSection[i];
-      const withinSection = currentQ - sectionStart + 1;
-      const pct = (withinSection / perSection[idx]) * 100;
-      dot.classList.add('active');
-      dot.style.setProperty('--fill', pct + '%');
-    }
-  });
-
-  document.getElementById('progressLabel').textContent = q.section;
-  document.getElementById('progressCount').textContent = `${currentQ + 1} / ${total}`;
 }
 
 function renderQuestion() {
   const q = QUESTIONS[currentQ];
-  document.getElementById('qEmoji').textContent = q.emoji;
-  // re-trigger animation
   const emojiEl = document.getElementById('qEmoji');
+  emojiEl.textContent = q.emoji;
   emojiEl.style.animation = 'none'; void emojiEl.offsetWidth; emojiEl.style.animation = '';
 
-  document.getElementById('qSection').textContent = q.section;
   document.getElementById('qTitle').textContent = q.title;
   const hint = document.getElementById('qHint');
   hint.textContent = q.hint || '';
@@ -840,11 +840,7 @@ function renderQuestion() {
     const btn = document.createElement('button');
     btn.className = 'option' + (q.type === 'multi' ? ' option-multi' : '');
     btn.dataset.value = opt.v;
-    btn.innerHTML = `
-      ${opt.e ? `<span class="option-emoji">${opt.e}</span>` : ''}
-      <span class="option-text">${opt.l}</span>
-      <span class="option-check"></span>
-    `;
+    btn.innerHTML = `${opt.e ? `<span class="option-emoji">${opt.e}</span>` : ''}<span class="option-text">${opt.l}</span><span class="option-check"></span>`;
     if (q.type === 'multi') {
       if ((answers[q.key] || []).includes(opt.v)) btn.classList.add('selected');
     } else {
@@ -866,15 +862,12 @@ function selectOption(q, val, btn) {
     if (idx > -1) {
       answers[q.key].splice(idx, 1);
       btn.classList.remove('selected');
-      // If deselecting "none" logic
     } else {
-      // If clicking "none" — clear others
       if (val === 'none') {
         answers[q.key] = ['none'];
         document.querySelectorAll('.option').forEach(el => el.classList.remove('selected'));
         btn.classList.add('selected');
       } else {
-        // If "none" was selected — remove it
         const noneIdx = answers[q.key].indexOf('none');
         if (noneIdx > -1) {
           answers[q.key].splice(noneIdx, 1);
@@ -890,11 +883,8 @@ function selectOption(q, val, btn) {
     document.querySelectorAll('.option').forEach(el => el.classList.remove('selected'));
     btn.classList.add('selected');
     setTimeout(() => {
-      if (currentQ < QUESTIONS.length - 1) {
-        nextQuestion();
-      } else {
-        updateNextButton();
-      }
+      if (currentQ < QUESTIONS.length - 1) { nextQuestion(); }
+      else { updateNextButton(); }
     }, 350);
   }
 }
@@ -908,42 +898,43 @@ function updateNextButton() {
   const show = q.type === 'multi' || currentQ === QUESTIONS.length - 1;
   btn.style.display = show ? 'inline-flex' : 'none';
   btn.disabled = !hasAnswer;
-
-  if (currentQ === QUESTIONS.length - 1) {
-    btn.innerHTML = hasAnswer ? 'Показати результат →' : 'Оберіть варіант';
-  } else {
-    btn.innerHTML = 'Далі →';
-  }
+  btn.innerHTML = currentQ === QUESTIONS.length - 1
+    ? (hasAnswer ? 'Показати результат →' : 'Оберіть варіант')
+    : 'Далі →';
 }
 
 function nextQuestion() {
   if (currentQ < QUESTIONS.length - 1) {
     currentQ++;
     renderQuestion();
-    const nextNum = currentQ + 1;
-    if (ACHIEVEMENTS[nextNum]) showAchievement(ACHIEVEMENTS[nextNum]);
+    const a = ACHIEVEMENTS[currentQ + 1];
+    if (a) showAchievement(a);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else {
-    showAchievement(ACHIEVEMENTS[12]);
+    if (ACHIEVEMENTS[12]) showAchievement(ACHIEVEMENTS[12]);
     setTimeout(() => goToContact(), 400);
   }
 }
 
 function prevQuestion() {
-  if (currentQ > 0) {
-    currentQ--;
-    renderQuestion();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+  if (currentQ > 0) { currentQ--; renderQuestion(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
 }
 
-// ══════════ CONTACT (LOCK) ══════════
+function updateProgress() {
+  const q = QUESTIONS[currentQ];
+  const total = QUESTIONS.length;
+  const pct = ((currentQ + 1) / total) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('levelIcon').textContent = q.sectionIdx + 1;
+  document.getElementById('levelNum').textContent = q.sectionIdx + 1;
+  document.getElementById('levelName').textContent = SECTION_NAMES[q.sectionIdx];
+  document.getElementById('levelCount').textContent = `${currentQ + 1}/${total}`;
+}
+
+// Contact
 function goToContact() {
   document.getElementById('screenQuestion').classList.remove('active');
   document.getElementById('progressWrap').style.display = 'none';
-  // Pre-fill blur score with real value for visual continuity
-  const preview = computeScore();
-  document.getElementById('lockScoreNum').textContent = preview;
   document.getElementById('screenContact').classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -961,29 +952,19 @@ function validateField(field) {
     const v = document.getElementById('fName').value.trim();
     const err = document.getElementById('errName');
     const inp = document.getElementById('fName');
-    if (v.length < 2) {
-      err.textContent = "Введіть ім'я (мінімум 2 символи)";
-      err.classList.add('show'); inp.classList.add('invalid'); return false;
-    }
+    if (v.length < 2) { err.textContent = "Введіть ім'я (мінімум 2 символи)"; err.classList.add('show'); inp.classList.add('invalid'); return false; }
     err.classList.remove('show'); inp.classList.remove('invalid'); return true;
   }
   if (field === 'contact') {
     const v = document.getElementById('fContact').value.trim();
     const err = document.getElementById('errContact');
     const inp = document.getElementById('fContact');
-    if (!v) {
-      err.textContent = 'Вкажіть Telegram @username або email';
-      err.classList.add('show'); inp.classList.add('invalid'); return false;
-    }
-    if (!isValidContact(v)) {
-      err.textContent = 'Схоже на некоректний формат. Приклад: @username або name@company.com';
-      err.classList.add('show'); inp.classList.add('invalid'); return false;
-    }
+    if (!v) { err.textContent = 'Вкажіть Telegram @username або email'; err.classList.add('show'); inp.classList.add('invalid'); return false; }
+    if (!isValidContact(v)) { err.textContent = 'Схоже на некоректний формат. Приклад: @username або name@company.com'; err.classList.add('show'); inp.classList.add('invalid'); return false; }
     err.classList.remove('show'); inp.classList.remove('invalid'); return true;
   }
   return true;
 }
-
 function validateForm() {
   const name = document.getElementById('fName').value.trim();
   const contact = document.getElementById('fContact').value.trim();
@@ -997,186 +978,119 @@ function submitContact() {
   const nameOK = validateField('name');
   const contactOK = validateField('contact');
   if (!nameOK || !contactOK) return;
-  const consent = document.getElementById('fConsent').checked;
-  if (!consent) { alert('Потрібна згода на обробку контактів'); return; }
-  const name = document.getElementById('fName').value.trim();
-  const contact = document.getElementById('fContact').value.trim();
-  const company = document.getElementById('fCompany').value.trim();
-
-  contactData = { name, contact, company, consent, timestamp: new Date().toISOString() };
+  if (!document.getElementById('fConsent').checked) { alert('Потрібна згода на обробку контактів'); return; }
+  contactData = {
+    name: document.getElementById('fName').value.trim(),
+    contact: document.getElementById('fContact').value.trim(),
+    company: document.getElementById('fCompany').value.trim(),
+    timestamp: new Date().toISOString()
+  };
   document.getElementById('screenContact').classList.remove('active');
   document.getElementById('screenReveal').classList.add('active');
-
-  document.getElementById('revealText').textContent = 'Готуємо ваш результат...';
-  const timer = null;
-
   const score = computeScore();
-  submitData({
-    event: 'contact_captured',
-    quizId, ...contactData,
-    score, tier: getTier(score).tier,
-    answers
-  });
-
+  submitData({ event: 'contact_captured', quizId, ...contactData, score, tier: getTier(score).tier, answers });
   setTimeout(() => {
     document.getElementById('screenReveal').classList.remove('active');
     renderResult();
     document.getElementById('screenResult').classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, 2100);
+  }, 1400);
 }
 
-// ══════════ SCORING ══════════
+// Scoring
 function computeScore() {
   let score = 0;
   const q = (idx) => QUESTIONS[idx];
-
-  // Q1 businessType (25%)
-  const q1 = q(0).options.find(o => o.v === answers.businessType);
-  if (q1) score += q1.s || 0;
-
-  // Q3 avgCheck (20%)
-  const q3 = q(2).options.find(o => o.v === answers.avgCheck);
-  if (q3) score += q3.s || 0;
-
-  // Q7 pain (20%) — take strongest pain from multi
+  const q1 = q(0).options.find(o => o.v === answers.businessType); if (q1) score += q1.s || 0;
+  const q3 = q(2).options.find(o => o.v === answers.avgCheck); if (q3) score += q3.s || 0;
   const painArr = answers.pain || [];
   if (painArr.length > 0) {
     const painScores = painArr.map(v => q(6).options.find(o => o.v === v)?.s || 0);
     score += Math.max(...painScores);
   }
-
-  // Q10 budget (20%)
-  const q10 = q(9).options.find(o => o.v === answers.budget);
-  if (q10) score += q10.s || 0;
-
-  // Q12 timing (15%)
-  const q12 = q(11).options.find(o => o.v === answers.timing);
-  if (q12) score += q12.s || 0;
-
-  // Bonuses
+  const q10 = q(9).options.find(o => o.v === answers.budget); if (q10) score += q10.s || 0;
+  const q12 = q(11).options.find(o => o.v === answers.timing); if (q12) score += q12.s || 0;
   if ((answers.platforms || []).includes('telegram')) score += 3;
   if (answers.audienceSize === '10-50k' || answers.audienceSize === '50k+') score += 4;
-  if (answers.ltv === '2k+') score += 3;
-  else if (answers.ltv === '500-2k') score += 2;
-
+  if (answers.ltv === '2k+') score += 3; else if (answers.ltv === '500-2k') score += 2;
   return Math.min(score, 100);
 }
 
 function getTier(score) {
-  if (score >= 85) return { tier: 'green',  label: 'Perfect match',       badge: 'badge-green' };
-  if (score >= 60) return { tier: 'yellow', label: 'Good match',          badge: 'badge-yellow' };
-  if (score >= 40) return { tier: 'orange', label: 'Fit with conditions', badge: 'badge-orange' };
-  return                { tier: 'red',    label: 'Not a fit right now', badge: 'badge-red' };
+  if (score >= 85) return { tier: 'green', label: 'Perfect match', badge: 'tier-green' };
+  if (score >= 60) return { tier: 'yellow', label: 'Strong match', badge: 'tier-yellow' };
+  if (score >= 40) return { tier: 'orange', label: 'Match з умовами', badge: 'tier-orange' };
+  return { tier: 'red', label: 'Не наш профіль', badge: 'tier-red' };
 }
 
-// ══════════ RECS ══════════
-function getRecommendations(score, answers) {
-  const recs = [];
-  const bt = answers.businessType;
-  const ltv = answers.ltv;
-  const painArr = answers.pain || [];
-
-  const btRecs = {
-    'expert':   'Ваш профіль (експерт) — core-сегмент Rodychi. Каскад TG-воронки mini → main → premium дає ROAS 5-7× у вашій ніші.',
-    'local':    'Локальний бізнес ідеально працює з Telegram-loyalty. У кейсі Elen Studio ми зменшили CPL повторного клієнта на 90%.',
-    'school':   'Модель онлайн-школи дозволяє побудувати другу воронку. У кейсі школи маркетингу це дало +35% доходу.',
-    'ecom':     'E-commerce отримує з Telegram найкращий retention. У кейсі DTC-бренду repeat purchase виріс на 58% за 4 місяці.',
-    'media':    'Медіа-проєкти виграють від крос-канальної моделі. У кейсі новинного каналу аудиторія зросла в 4 рази.',
-    'b2b':      'B2B через експертний канал засновника — наш підхід №1. У кейсі HR-SaaS ми знизили CAC на 72%.',
-    'other':    'Ваша ніша потребує глибшого дослідження — забронюйте discovery-дзвінок.'
+// Actions
+function getActions() {
+  const bt = answers.businessType, ltv = answers.ltv, painArr = answers.pain || [];
+  const actions = [];
+  const btA = {
+    expert: 'Побудувати каскад: mini-продукт → основна програма → преміум-підписка. Це модель, за якою експерти виходять на $10-25K/міс.',
+    local: 'Перенести CRM-базу в закритий Telegram-канал і запустити тижневі розсилки-офери. Meta залучає нових, Telegram повертає за $0.',
+    school: 'Побудувати другу воронку: канал випускників → преміум-програма → менторська підписка. Це +30-50% доходу без нових лідів.',
+    ecom: 'Запустити Telegram-loyalty з ексклюзивними дропами для підписників. У DTC-брендів це дає +58% repeat purchase.',
+    media: 'Побудувати sales-воронку для рекламодавців з медіа-кітом + автоматичною ротацією слотів у боті.',
+    b2b: 'Створити експертний канал засновника + закритий чат для B2B-директорів. Discovery через контент, не через холодні дзвінки.',
+    other: 'Стартуйте з discovery-дзвінка — розберемо вашу ситуацію і зробимо персональну архітектуру.'
   };
-  recs.push(btRecs[bt] || btRecs['other']);
-
+  actions.push(btA[bt] || btA.other);
   if (ltv === '500-2k' || ltv === '2k+') {
-    recs.push(`Ваш LTV ${ltv === '2k+' ? '$2K+' : '$500-2K'} дозволяє інвестувати $80-200 у CAC — відкривається офіційний Telegram Ads (CPM від €0.4).`);
+    actions.push('Ваш LTV дозволяє інвестувати $80-200 у CAC — відкривається офіційний Telegram Ads (CPM від €0.4) та якісні посіви в тематичних каналах.');
   } else if (ltv === '100-500') {
-    recs.push('При чеку $100-500 добре працюють посіви в тематичних каналах (CPM від 90 грн) — так ми зробили 240% ROMI у школі англійської.');
-  } else if (ltv === '<100') {
-    recs.push('При низькому LTV критично важливо мати повторні покупки. Telegram-канал дає retention у 3-4 рази вищий за Instagram.');
+    actions.push('При чеку $100-500 стабільно працюють посіви в тематичних каналах (CPM від 90 грн). Це підхід, яким ми зробили 240% ROMI у школі англійської.');
   } else {
-    recs.push('Порахувати LTV — фундаментальна метрика для запуску воронки. Ми допоможемо на discovery-дзвінку.');
+    actions.push('Порахувати LTV — фундамент для будь-якої платної реклами. Без цієї цифри неможливо оцінити чи повертає канал інвестицію.');
   }
-
-  const painRecs = {
-    'cpl_grow':       'Проблема з CPL — типова історія після iOS-обмежень Meta. Telegram Ads + власна база вирішують це за 60-90 днів.',
-    'no_repeat':      'Відсутність повторних — головна проблема, яку вирішує Telegram. У кейсі Elen Studio ми підвищили LTV на 82%.',
-    'cannot_scale':   'Масштабування без зростання CAC — це те, що робить Rodychi Growth OS. Стелі виникають від відсутності архітектури.',
-    'meta_ban':       'Meta-бани — найчастіша причина міграції клієнтів на Telegram. Тут ви господар власної бази.',
-    'referral_slow':  'Сарафан має плафон. Telegram робить його масштабованим — контент стає активом, а не одноразовою розмовою.',
-    'no_attribution': 'У Telegram кожен клієнт trackable. Наша аналітика показує LTV/CAC по кожному трафік-джерелу.',
-    'no_time':        'Це нормально. Наш ретейнер бере на себе весь стек. Ваша роль — брифінг-сесія раз на тиждень.',
-    'no_content':     'У нас є 47-сторінковий Growth OS Playbook з 25 постійними рубриками. Дамо готову контент-стратегію.'
+  const painA = {
+    cpl_grow: 'Замінити Meta-only модель на Telegram Ads + власну базу підписників. За 60-90 днів CPL повторного клієнта падає практично до $0.',
+    no_repeat: 'Побудувати Telegram-канал як retention-актив. У кейсі Elen Studio LTV зріс на 82% за 6 місяців без збільшення бюджету.',
+    cannot_scale: 'Проблема не в бюджеті, а у відсутності архітектури. Rodychi Growth OS вирішує саме це — masштабуємо через system, не через збільшення витрат.',
+    meta_ban: 'Telegram — єдина платформа, де ви господар власної бази. Ніхто не забере акаунт, ніхто не змінить алгоритми.',
+    referral_slow: 'Сарафан має плафон — його розмір рівний вашому колу знайомств. Telegram-канал робить контент масштабованим активом.',
+    no_attribution: 'У Telegram кожен клієнт trackable. Наша аналітика розкладає LTV/CAC по кожному джерелу окремо.',
+    no_time: 'Наш ретейнер бере на себе весь стек. Ваша роль — 1-годинна брифінг-сесія раз на тиждень.',
+    no_content: 'У нас є 47-сторінковий Growth OS Playbook з 25 постійними рубриками. Отримуєте готову контент-стратегію.'
   };
-  if (painArr.length > 0) {
-    recs.push(painRecs[painArr[0]] || 'Ми детально розберемо ваш кейс на discovery-дзвінку.');
-  } else {
-    recs.push('Ми детально розберемо ваш кейс на discovery-дзвінку.');
-  }
-  return recs;
+  if (painArr.length > 0) actions.push(painA[painArr[0]] || 'Ми детально розберемо ваш кейс на discovery-дзвінку.');
+  return actions;
 }
 
-function getSignals() {
-  const q = (idx) => QUESTIONS[idx];
-  const btOpt = q(0).options.find(o => o.v === answers.businessType);
-  const chOpt = q(2).options.find(o => o.v === answers.avgCheck);
-  const bdOpt = q(9).options.find(o => o.v === answers.budget);
-  const tmOpt = q(11).options.find(o => o.v === answers.timing);
-  const painArr = answers.pain || [];
-  const painMax = painArr.length ? Math.max(...painArr.map(v => q(6).options.find(o => o.v === v)?.s || 0)) : 0;
-
-  const signals = [
-    { label: 'Business fit',        value: btOpt?.s || 0, max: 25 },
-    { label: 'Revenue readiness',   value: chOpt?.s || 0, max: 20 },
-    { label: 'Pain severity',       value: painMax,       max: 20 },
-    { label: 'Budget capacity',     value: bdOpt?.s || 0, max: 20 },
-    { label: 'Timing / готовність', value: tmOpt?.s || 0, max: 15 }
-  ];
-  signals.forEach(s => s.pct = Math.round((s.value / s.max) * 100));
-  return signals;
-}
-
-function getForecast(score, answers) {
-  const chek = answers.avgCheck;
-  const ltv = answers.ltv;
-  const nc = answers.newClients;
-
-  // Estimate potential MRR growth in K
+// Before/After
+function getBeforeAfter() {
+  const chek = answers.avgCheck, ltv = answers.ltv, nc = answers.newClients;
   let mrrLift = 8;
-  if (chek === '<50') mrrLift = 3;
-  else if (chek === '50-200') mrrLift = 6;
-  else if (chek === '200-1k') mrrLift = 12;
-  else if (chek === '1k-5k') mrrLift = 22;
+  if (chek === '<50') mrrLift = 3; else if (chek === '50-200') mrrLift = 6;
+  else if (chek === '200-1k') mrrLift = 12; else if (chek === '1k-5k') mrrLift = 22;
   else if (chek === '5k+') mrrLift = 45;
-
-  if (nc === '20-100') mrrLift *= 1.4;
-  else if (nc === '100+') mrrLift *= 2;
-
+  if (nc === '20-100') mrrLift *= 1.4; else if (nc === '100+') mrrLift *= 2;
   const cplBefore = (ltv === '2k+' || ltv === '500-2k') ? '$18' : '$8';
   const cplAfter = (ltv === '2k+' || ltv === '500-2k') ? '$4-6' : '$1.5-3';
-
-  return {
-    mrrLow: `+$${Math.round(mrrLift * 0.8)}K`,
-    mrrHigh: `+$${Math.round(mrrLift * 1.2)}K`,
-    cpl: `${cplBefore} → ${cplAfter}`,
-    repeat: '+40-60%'
-  };
+  const ltvBefore = ltv === '<100' ? '$60' : ltv === '100-500' ? '$220' : ltv === '500-2k' ? '$1 200' : ltv === '2k+' ? '$3 500' : '—';
+  const ltvAfter = ltv === '<100' ? '$105' : ltv === '100-500' ? '$380' : ltv === '500-2k' ? '$2 040' : ltv === '2k+' ? '$5 800' : '—';
+  return [
+    { label: 'Виторг з Telegram/міс', now: '$0', next: `+$${Math.round(mrrLift * 0.8)}-${Math.round(mrrLift * 1.2)}K` },
+    { label: 'Вартість ліда (CPL)',    now: cplBefore, next: cplAfter },
+    { label: 'LTV клієнта',            now: ltvBefore, next: ltvAfter },
+    { label: 'Повторні продажі',       now: '18-25%', next: '+40-60%' }
+  ];
 }
 
-// ══════════ RENDER RESULT ══════════
+// Render result
 function renderResult() {
   const score = computeScore();
   const tier = getTier(score);
-  const recs = getRecommendations(score, answers);
-  const forecast = getForecast(score, answers);
+  const actions = getActions();
+  const ba = getBeforeAfter();
 
-  const badgeEl = document.getElementById('resultBadge');
-  badgeEl.className = 'result-badge ' + tier.badge;
-  badgeEl.textContent = tier.label;
+  const tierEl = document.getElementById('tierChip');
+  tierEl.className = 'result-tier-chip ' + tier.badge;
+  tierEl.textContent = tier.label;
 
-  // Score arc
   const arc = document.getElementById('scoreArc');
-  const offset = 596.9 - (596.9 * score / 100);
+  const offset = 653.4 - (653.4 * score / 100);
   setTimeout(() => arc.style.strokeDashoffset = offset, 150);
 
   const scoreNum = document.getElementById('scoreNum');
@@ -1189,121 +1103,88 @@ function renderResult() {
   }, 40);
 
   const titles = {
-    green:  'Ваш бізнес готовий до масштабування в Telegram',
+    green: 'Ваш бізнес готовий до масштабування в Telegram',
     yellow: 'Ваш бізнес підходить — з фокусом на кілька фіксів',
     orange: 'Є передумови для росту, але потрібна підготовка',
-    red:    'Зараз не найкращий момент — але це не назавжди'
+    red: 'Зараз не найкращий момент — але це не назавжди'
   };
   const subs = {
-    green:  'Компанії з подібним профілем виходять на стабільний ROAS 5-7× за перші 60-90 днів роботи з нами.',
-    yellow: 'Виправлення 2-3 фундаментальних елементів (найчастіше — воронка та джерело трафіку) дає результат за 60-90 днів.',
-    orange: 'Ваш профіль має структурні прогалини — найчастіше LTV або відсутність систематичного джерела трафіку. Виправити реально за 90 днів.',
-    red:    'Не означає, що бізнес поганий. Означає, що для Telegram-росту зараз потрібна інша сходинка розвитку. Порекомендуємо що зробити.'
+    green: 'Компанії з подібним профілем стабільно виходять на ROAS 5-7× за 60-90 днів. Ми готові стартувати з вами найближчими тижнями.',
+    yellow: 'Виправлення 2-3 фундаментальних елементів (найчастіше — воронка або джерело трафіку) дає стрибок результатів за 60-90 днів.',
+    orange: 'Ваш профіль має структурні прогалини — LTV, retention або трафік. Реально виправити за 90 днів з правильним підходом.',
+    red: 'Це не означає, що бізнес поганий. Означає, що зараз для Telegram-росту потрібна інша сходинка розвитку. Дамо чесні рекомендації.'
   };
   document.getElementById('resultTitle').textContent = titles[tier.tier];
   document.getElementById('resultSub').textContent = subs[tier.tier];
 
-  // Profile
-  const findOptLabel = (key) => {
-    const q = QUESTIONS.find(x => x.key === key);
-    const a = answers[key];
+  const findLabel = (key) => {
+    const q = QUESTIONS.find(x => x.key === key), a = answers[key];
     if (!q || !a) return '—';
-    if (Array.isArray(a)) {
-      return a.map(v => q.options.find(o => o.v === v)?.l).filter(Boolean).join(', ') || '—';
-    }
+    if (Array.isArray(a)) return a.map(v => q.options.find(o => o.v === v)?.l).filter(Boolean).join(', ') || '—';
     return q.options.find(o => o.v === a)?.l || '—';
   };
-
   document.getElementById('profileList').innerHTML = `
-    <div class="profile-item"><span class="profile-lbl">Тип</span><span class="profile-val">${findOptLabel('businessType')}</span></div>
-    <div class="profile-item"><span class="profile-lbl">Ніша</span><span class="profile-val">${findOptLabel('niche')}</span></div>
-    <div class="profile-item"><span class="profile-lbl">Середній чек</span><span class="profile-val">${findOptLabel('avgCheck')}</span></div>
-    <div class="profile-item"><span class="profile-lbl">Платформи</span><span class="profile-val">${findOptLabel('platforms')}</span></div>
-    <div class="profile-item"><span class="profile-lbl">LTV</span><span class="profile-val">${findOptLabel('ltv')}</span></div>
-    <div class="profile-item"><span class="profile-lbl">Бюджет</span><span class="profile-val">${findOptLabel('budget')}/міс</span></div>
-    <div class="profile-item"><span class="profile-lbl">Готовність</span><span class="profile-val">${findOptLabel('timing')}</span></div>
-    <div class="profile-item"><span class="profile-lbl">Команда</span><span class="profile-val">${findOptLabel('team')}</span></div>
+    <div class="profile-item"><span class="profile-lbl">Тип</span><span class="profile-val">${findLabel('businessType')}</span></div>
+    <div class="profile-item"><span class="profile-lbl">Ніша</span><span class="profile-val">${findLabel('niche')}</span></div>
+    <div class="profile-item"><span class="profile-lbl">Середній чек</span><span class="profile-val">${findLabel('avgCheck')}</span></div>
+    <div class="profile-item"><span class="profile-lbl">Платформи</span><span class="profile-val">${findLabel('platforms')}</span></div>
+    <div class="profile-item"><span class="profile-lbl">LTV</span><span class="profile-val">${findLabel('ltv')}</span></div>
+    <div class="profile-item"><span class="profile-lbl">Бюджет</span><span class="profile-val">${findLabel('budget')}/міс</span></div>
+    <div class="profile-item"><span class="profile-lbl">Готовність</span><span class="profile-val">${findLabel('timing')}</span></div>
+    <div class="profile-item"><span class="profile-lbl">Команда</span><span class="profile-val">${findLabel('team')}</span></div>
   `;
 
-  document.getElementById('recsList').innerHTML = recs.map((r, i) => `
-    <div class="rec">
-      <div class="rec-num">${i + 1}</div>
-      <div class="rec-text">${r}</div>
-    </div>
-  `).join('');
-
-  document.getElementById('forecastGrid').innerHTML = `
-    <div class="forecast-item">
-      <div class="forecast-lbl">Ріст виторгу</div>
-      <div class="forecast-val" style="font-size:20px">${forecast.mrrLow}—${forecast.mrrHigh}</div>
-      <div class="forecast-sub">потенціал за 60 днів</div>
-    </div>
-    <div class="forecast-item">
-      <div class="forecast-lbl">Вартість ліда</div>
-      <div class="forecast-val" style="font-size:16px">${forecast.cpl}</div>
-      <div class="forecast-sub">очікуване зниження</div>
-    </div>
-    <div class="forecast-item">
-      <div class="forecast-lbl">Повторні продажі</div>
-      <div class="forecast-val">${forecast.repeat}</div>
-      <div class="forecast-sub">до поточного рівня</div>
-    </div>
+  // Before/After table
+  const baHtml = `
+    <div class="ba-head"></div>
+    <div class="ba-head hnow">Зараз</div>
+    <div class="ba-head"></div>
+    <div class="ba-head hnext">Rodychi × 60 днів</div>
+    ${ba.map(r => `
+      <div class="ba-row-label">${r.label}</div>
+      <div class="ba-row-now">${r.now}</div>
+      <div class="ba-arrow">→</div>
+      <div class="ba-row-next">${r.next}</div>
+    `).join('')}
   `;
+  document.getElementById('baTable').innerHTML = baHtml;
 
-  const ctaTitles = {
-    green:  'Готові стартувати в найближчі 2 тижні?',
-    yellow: '30 хвилин discovery — і у вас буде план',
-    orange: 'Розберемо структурні прогалини на дзвінку',
-    red:    'Порекомендуємо, що зробити спочатку'
+  // Actions
+  document.getElementById('actionsList').innerHTML = actions.map((r, i) => `
+    <div class="action">
+      <div class="action-num">${i + 1}</div>
+      <div class="action-text">${r}</div>
+    </div>`).join('');
+
+  // Lead magnet
+  const magnet = MAGNETS[answers.businessType] || MAGNETS.other;
+  document.getElementById('magnetTitle').textContent = magnet.title;
+  document.getElementById('magnetSub').textContent = magnet.sub;
+  document.getElementById('magnetMeta').innerHTML = magnet.meta.map(m => `<span>${m}</span>`).join('');
+  document.getElementById('magnetBtn').href = magnet.url;
+
+  // Discovery
+  const disc = {
+    green: { title: 'Пріоритетний слот на discovery-дзвінок', sub: 'Готові стартувати найближчими тижнями? 30 хвилин з засновником — розберемо ваш кейс і дамо план на 90 днів.' },
+    yellow: { title: '30 хвилин discovery — і у вас буде план', sub: 'Розберемо ваш кейс, розробимо стратегію фіксів, покажемо шлях до вищого score.' },
+    orange: { title: 'Дзвінок для розбору структурних прогалин', sub: 'За 30 хвилин розкладемо, що саме треба виправити, щоб перейти в зелену зону.' },
+    red: { title: 'Дамо чесні рекомендації, що робити спочатку', sub: 'На дзвінку розкажемо, коли вам буде правильно повернутись і що робити тим часом.' }
   };
-  document.getElementById('ctaTitle').textContent = ctaTitles[tier.tier];
-  document.getElementById('ctaSub').textContent = 'Discovery-дзвінок 30 хвилин · безкоштовно · без зобов\'язань';
+  const d = disc[tier.tier];
+  document.getElementById('discoveryTitle').textContent = d.title;
+  document.getElementById('discoverySub').textContent = d.sub;
 
-  // Auto-submit result
-  submitData({ event: 'quiz_completed', quizId, ...contactData, score, tier: tier.tier, answers, forecast });
+  // Submit
+  submitData({ event: 'quiz_completed', quizId, ...contactData, score, tier: tier.tier, answers, magnetUrl: magnet.url });
 }
 
-// ══════════ SUBMIT ══════════
+// Submit
 function submitData(payload) {
   console.log('[Rodychi Fit Score]', payload);
-  if (CONFIG.submitEndpoint) {
-    fetch(CONFIG.submitEndpoint, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).catch(e => console.error(e));
-  }
-  if (CONFIG.botWebhook) {
-    fetch(CONFIG.botWebhook, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).catch(e => console.error(e));
-  }
+  if (CONFIG.submitEndpoint) fetch(CONFIG.submitEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(() => {});
+  if (CONFIG.botWebhook) fetch(CONFIG.botWebhook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(() => {});
   try { localStorage.setItem('rodychi_lastResult', JSON.stringify(payload)); } catch(e) {}
 }
-
-// ══════════ COUNT-UP animation на splash ══════════
-function countUp(el) {
-  const target = parseInt(el.dataset.count, 10);
-  const suffix = el.dataset.suffix || '';
-  const duration = 1400;
-  const start = performance.now();
-  function tick(now) {
-    const t = Math.min(1, (now - start) / duration);
-    const eased = 1 - Math.pow(1 - t, 3);
-    el.textContent = Math.round(target * eased) + suffix;
-    if (t < 1) requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-}
-window.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.meta-val[data-count]').forEach(countUp);
-});
-
-window.addEventListener('beforeunload', () => {
-  if (Object.keys(answers).length > 0) {
-    try { localStorage.setItem('rodychi_quizState', JSON.stringify({ currentQ, answers, quizId })); } catch(e) {}
-  }
-});
 </script>
 </body>
 </html>
