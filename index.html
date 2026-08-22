@@ -543,16 +543,12 @@
     <div class="splash-fig-airplane"></div>
     <div class="splash-fig-dollar"></div>
     <div class="splash-content">
-      <div class="splash-eyebrow">
-        <span class="eyebrow-mark">TELEGRAM · АГЕНЦІЯ ПОВНОГО ЦИКЛУ</span>
-      </div>
       <h1 class="splash-title">Гра · аудит<br>для <span class="gold">вашого</span> бізнесу</h1>
       <p class="splash-sub">
         <b>5 хвилин · 12 питань.</b> Ви отримаєте те, за що агенції беруть $500. Особистий план росту, розроблений під вашу нішу.
       </p>
 
       <div class="value-stack">
-        <div class="value-fig"></div>
         <div class="value-title">🎁 Що ви отримаєте безкоштовно</div>
         <div class="value-list">
           <div class="value-row"><div class="value-icon">🎯</div><div class="value-text"><b>Персональний Fit Score 0 · 100</b><span>Оцінка готовності вашого бізнесу до Telegram-росту</span></div></div>
@@ -614,6 +610,11 @@
         <label for="fCompany">Назва бізнесу або каналу <span style="color:var(--slate-lite);text-transform:none;letter-spacing:0">(необов'язково)</span></label>
         <input type="text" id="fCompany" placeholder="Наприклад: Rodychi Media">
       </div>
+      <div class="form-row">
+        <label for="fInstagram">Instagram бізнесу або сайт</label>
+        <input type="text" id="fInstagram" placeholder="@rodychi або rodychi.media" oninput="validateForm()" onblur="validateField('instagram')">
+        <div class="form-err" id="errInstagram"></div>
+      </div>
       <label class="consent">
         <input type="checkbox" id="fConsent" checked>
         <span>Погоджуюсь на обробку контактів для отримання результатів аудиту.</span>
@@ -637,8 +638,7 @@
 
 <section class="screen" id="screenResult">
   <div class="wide-container">
-    <div class="result-eyebrow-wrap">
-      <span class="eyebrow-mark">TELEGRAM · АГЕНЦІЯ ПОВНОГО ЦИКЛУ</span>
+    <div class="result-eyebrow-wrap" style="justify-content:flex-end">
       <span class="eyebrow-mark">РЕЗУЛЬТАТ</span>
     </div>
 
@@ -876,13 +876,23 @@ function isValidEmail(s){return /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(s);}
 function isValidTelegram(s){const clean=s.startsWith('@')?s.slice(1):s;return /^[a-zA-Z][a-zA-Z0-9_]{4,31}$/.test(clean);}
 function isValidContact(s){return isValidEmail(s)||isValidTelegram(s);}
 
+function isValidInstagram(s){
+  const t=s.trim();
+  if(!t)return false;
+  // Accept @username, instagram.com/username, or any website (with or without protocol)
+  const ig=/^@?[a-zA-Z0-9._]{2,30}$/;
+  const igUrl=/^https?:\/\/(www\.)?instagram\.com\/[a-zA-Z0-9._]{2,30}\/?$/i;
+  const site=/^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]{2,}(\.[a-zA-Z]{2,})+(\/[^\s]*)?$/i;
+  return ig.test(t)||igUrl.test(t)||site.test(t);
+}
 function validateField(field){
   if(field==='name'){const v=document.getElementById('fName').value.trim();const err=document.getElementById('errName');const inp=document.getElementById('fName');if(v.length<2){err.textContent="Введіть імʼя (мінімум 2 символи)";err.classList.add('show');inp.classList.add('invalid');return false;}err.classList.remove('show');inp.classList.remove('invalid');return true;}
   if(field==='contact'){const v=document.getElementById('fContact').value.trim();const err=document.getElementById('errContact');const inp=document.getElementById('fContact');if(!v){err.textContent='Вкажіть Telegram @username або email';err.classList.add('show');inp.classList.add('invalid');return false;}if(!isValidContact(v)){err.textContent='Схоже на некоректний формат. Приклад: @username або name@company.com';err.classList.add('show');inp.classList.add('invalid');return false;}err.classList.remove('show');inp.classList.remove('invalid');return true;}
+  if(field==='instagram'){const v=document.getElementById('fInstagram').value.trim();const err=document.getElementById('errInstagram');const inp=document.getElementById('fInstagram');if(!v){err.textContent='Вкажіть Instagram бізнесу або сайт';err.classList.add('show');inp.classList.add('invalid');return false;}if(!isValidInstagram(v)){err.textContent='Приклад: @rodychi або rodychi.media';err.classList.add('show');inp.classList.add('invalid');return false;}err.classList.remove('show');inp.classList.remove('invalid');return true;}
   return true;
 }
-function validateForm(){const name=document.getElementById('fName').value.trim();const contact=document.getElementById('fContact').value.trim();const consent=document.getElementById('fConsent').checked;const ok=name.length>=2&&isValidContact(contact)&&consent;document.getElementById('submitBtn').disabled=!ok;return ok;}
-function submitContact(){if(!validateField('name')||!validateField('contact'))return;if(!document.getElementById('fConsent').checked){alert('Потрібна згода на обробку контактів');return;}contactData={name:document.getElementById('fName').value.trim(),contact:document.getElementById('fContact').value.trim(),company:document.getElementById('fCompany').value.trim(),timestamp:new Date().toISOString()};document.getElementById('screenContact').classList.remove('active');document.getElementById('screenReveal').classList.add('active');const score=computeScore();submitData({event:'contact_captured',quizId,...contactData,score,tier:getTier(score).tier,answers});setTimeout(()=>{document.getElementById('screenReveal').classList.remove('active');renderResult();document.getElementById('screenResult').classList.add('active');window.scrollTo({top:0,behavior:'smooth'});},1400);}
+function validateForm(){const name=document.getElementById('fName').value.trim();const contact=document.getElementById('fContact').value.trim();const insta=document.getElementById('fInstagram').value.trim();const consent=document.getElementById('fConsent').checked;const ok=name.length>=2&&isValidContact(contact)&&isValidInstagram(insta)&&consent;document.getElementById('submitBtn').disabled=!ok;return ok;}
+function submitContact(){if(!validateField('name')||!validateField('contact')||!validateField('instagram'))return;if(!document.getElementById('fConsent').checked){alert('Потрібна згода на обробку контактів');return;}contactData={name:document.getElementById('fName').value.trim(),contact:document.getElementById('fContact').value.trim(),company:document.getElementById('fCompany').value.trim(),instagram:document.getElementById('fInstagram').value.trim(),timestamp:new Date().toISOString()};document.getElementById('screenContact').classList.remove('active');document.getElementById('screenReveal').classList.add('active');const score=computeScore();submitData({event:'contact_captured',quizId,...contactData,score,tier:getTier(score).tier,answers});setTimeout(()=>{document.getElementById('screenReveal').classList.remove('active');renderResult();document.getElementById('screenResult').classList.add('active');window.scrollTo({top:0,behavior:'smooth'});},1400);}
 
 function computeScore(){let score=0;const q=(idx)=>QUESTIONS[idx];const q1=q(0).options.find(o=>o.v===answers.businessType);if(q1)score+=q1.s||0;const q3=q(2).options.find(o=>o.v===answers.avgCheck);if(q3)score+=q3.s||0;const painArr=answers.pain||[];if(painArr.length>0){const painScores=painArr.map(v=>q(6).options.find(o=>o.v===v)?.s||0);score+=Math.max(...painScores);}const q10=q(9).options.find(o=>o.v===answers.budget);if(q10)score+=q10.s||0;const q12=q(11).options.find(o=>o.v===answers.timing);if(q12)score+=q12.s||0;if((answers.platforms||[]).includes('telegram'))score+=3;if(answers.audienceSize==='10-50k'||answers.audienceSize==='50k+')score+=4;if(answers.ltv==='2k+')score+=3;else if(answers.ltv==='500-2k')score+=2;return Math.min(score,100);}
 
