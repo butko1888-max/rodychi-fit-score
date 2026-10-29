@@ -11,14 +11,6 @@
 <meta property="og:locale" content="uk_UA">
 <meta name="theme-color" content="#0A2895">
 
-<!-- Meta Pixel -->
-<script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','1668225904837875');
-fbq('track','PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1668225904837875&ev=PageView&noscript=1"/></noscript>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -386,25 +378,13 @@ const QUESTIONS = [
     required: true,
   },
   {
-    key: 'ops',
-    type: 'multi',
-    q: 'Операційка',
-    hint: 'Як у вас побудований процес обробки заявок.',
-    fields: [
-      { key: 'who_handles', label: 'Хто обробляє заявки', type: 'select', options: ['я особисто', 'штатний менеджер', 'декілька менеджерів', 'бот + людина', 'поки ніхто'], required: true },
-      { key: 'has_crm', label: 'Чи є CRM або табличка', type: 'select', options: ['повноцінна CRM', 'Google-таблиця', 'нотатки у Telegram', 'ніде не фіксую'], required: true },
-      { key: 'country', label: 'Юридична сторона', type: 'select', options: ['компанія в Україні', 'компанія в ЄС', 'ФОП у третій країні', 'без юр. особи', 'інше'], required: true },
-    ],
-  },
-  {
-    key: 'contact',
-    type: 'multi',
-    q: 'Куди відправити стратегію',
-    hint: 'Контакти, щоб ми надіслали вам відповідь протягом 24 годин.',
-    fields: [
-      { key: 'name', label: 'Ваше ім\'я', type: 'text', placeholder: 'Напр.: Ксенія', required: true },
-      { key: 'contact', label: 'Telegram / email / телефон', type: 'text', placeholder: '@username або email', required: true },
-    ],
+    key: 'source',
+    type: 'single',
+    q: 'Звідки ви про нас дізналися?',
+    hint: 'Це допоможе нам розуміти, що працює.',
+    type_field: 'radio',
+    options: ['Telegram-канал Rodychi', 'Instagram', 'Рекомендація знайомих', 'Пошук в Google', 'Youtube / подкаст', 'Інше'],
+    required: true,
   },
 ];
 
@@ -559,20 +539,19 @@ async function submitBrief() {
   btn.disabled = true;
   btn.innerHTML = 'Надсилаємо…';
 
-  // Flatten contact for notification formatting
-  const contact = ANSWERS.contact || {};
   const payload = {
     event: 'client_brief',
     quizId: quizId,
     source: SESSION_SOURCE,
-    name: contact.name || '',
-    contact: contact.contact || '',
+    name: 'Ксенія',
+    contact: 'відома менеджеру',
     company: ANSWERS.company_name || '',
     niche: (ANSWERS.business_info && ANSWERS.business_info.niche) || '',
-    business_type: (ANSWERS.ops && ANSWERS.ops.country) || '',
+    business_type: '',
     avg_check: (ANSWERS.economics && ANSWERS.economics.avg_check) || '',
     budget: ANSWERS.budget || '',
     timing: (ANSWERS.goals && ANSWERS.goals.start_when) || '',
+    source_channel: ANSWERS.source || '',
     score: 0,
     tier: 'brief',
     answers: ANSWERS,
@@ -587,11 +566,6 @@ async function submitBrief() {
     });
     const j = await r.json().catch(() => ({}));
     if (!r.ok || !j.ok) throw new Error(j.err || ('status ' + r.status));
-
-    // Pixel event
-    if (window.fbq) {
-      fbq('track', 'Lead', { content_name: 'Client Brief', content_category: 'brief' });
-    }
 
     document.getElementById('screen-questions').classList.add('hidden');
     document.getElementById('screen-thanks').classList.remove('hidden');
