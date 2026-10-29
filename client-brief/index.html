@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>Клієнтський бриф — Rodychi Media</title>
+<meta name="description" content="Короткий бриф для клієнтів Rodychi Media — заповніть за 7 хвилин і ми надішлемо стратегію під вашу нішу протягом 24 годин.">
+<meta property="og:title" content="Клієнтський бриф — Rodychi Media">
+<meta property="og:description" content="7 хвилин · 10 питань · персональна стратегія протягом 24 годин">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="uk_UA">
+<meta name="theme-color" content="#0A2895">
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1668225904837875');
+fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1668225904837875&ev=PageView&noscript=1"/></noscript>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0A1024;
+  --bg-2: #0F1838;
+  --card: #141E42;
+  --border: #26305A;
+  --accent: #4E7DF4;
+  --accent-2: #6CA3FF;
+  --text: #ECF0FF;
+  --muted: #8E9AC4;
+  --success: #4ADE80;
+  --error: #FF6E6E;
+  --radius: 16px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 30% 10%, rgba(78,125,244,0.25), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(108,163,255,0.18), transparent 60%);
+}
+
+.wrap {
+  position: relative; z-index: 1;
+  max-width: 720px; margin: 0 auto;
+  padding: 24px 20px 60px;
+}
+
+.brand {
+  display: flex; align-items: center; gap: 10px;
+  color: var(--muted); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
+  margin-bottom: 32px;
+}
+.brand .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+
+h1 {
+  font-family: 'Unbounded', sans-serif; font-weight: 700;
+  font-size: clamp(28px, 5vw, 42px);
+  line-height: 1.15; margin-bottom: 16px;
+}
+h1 .accent { color: var(--accent-2); }
+.lead {
+  color: var(--muted); font-size: 16px; max-width: 560px; margin-bottom: 32px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 20px;
+}
+
+.hero-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  margin: 24px 0 32px;
+}
+.hero-stats .stat {
+  background: rgba(78,125,244,0.08);
+  border: 1px solid rgba(78,125,244,0.2);
+  padding: 14px 12px; border-radius: 12px;
+  text-align: center;
+}
+.hero-stats .stat .num { font-family: 'Unbounded', sans-serif; font-size: 22px; font-weight: 700; color: var(--accent-2); }
+.hero-stats .stat .lbl { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 16px 28px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: white; border: none; cursor: pointer;
+  font-family: 'Unbounded', sans-serif; font-weight: 700;
+  font-size: 16px; letter-spacing: 0.02em;
+  border-radius: 12px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  width: 100%;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(78,125,244,0.4); }
+.btn.secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.btn.secondary:hover { background: var(--card); border-color: var(--accent); box-shadow: none; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.progress {
+  background: rgba(255,255,255,0.05);
+  height: 6px; border-radius: 3px; overflow: hidden;
+  margin-bottom: 24px;
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  width: 0; transition: width 0.4s ease;
+  border-radius: 3px;
+}
+.step-counter {
+  color: var(--muted); font-size: 13px; margin-bottom: 8px;
+  display: flex; justify-content: space-between;
+}
+
+.q {
+  font-family: 'Unbounded', sans-serif; font-weight: 600;
+  font-size: 20px; line-height: 1.3; margin-bottom: 10px;
+}
+.q .num {
+  display: inline-block;
+  background: var(--accent); color: white;
+  font-size: 14px; padding: 2px 10px; border-radius: 999px;
+  margin-right: 10px; vertical-align: middle;
+}
+.hint { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+
+.input, .textarea, .select {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: var(--text);
+  font-family: inherit; font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.input:focus, .textarea:focus, .select:focus {
+  border-color: var(--accent);
+  background: rgba(78,125,244,0.08);
+}
+.textarea { resize: vertical; min-height: 90px; }
+.select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%238E9AC4' d='M6 8L0 0h12z'/></svg>");
+  background-repeat: no-repeat; background-position: right 16px center;
+  padding-right: 40px;
+}
+
+.options { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+.opt {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-size: 15px;
+}
+.opt:hover { border-color: var(--accent); background: rgba(78,125,244,0.08); }
+.opt input { display: none; }
+.opt .box {
+  flex-shrink: 0; width: 20px; height: 20px;
+  border: 2px solid var(--border); border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+}
+.opt input:checked + .box {
+  background: var(--accent); border-color: var(--accent);
+}
+.opt input:checked + .box::after {
+  content: ""; width: 10px; height: 10px; background: white; border-radius: 2px;
+}
+.opt input[type="radio"] + .box { border-radius: 50%; }
+.opt input[type="radio"]:checked + .box::after { border-radius: 50%; }
+.opt input:checked ~ * { color: var(--accent-2); }
+.opt input:checked + .box ~ span { color: var(--text); font-weight: 500; }
+.opt.selected { border-color: var(--accent); background: rgba(78,125,244,0.1); }
+
+.nav {
+  display: flex; gap: 12px; margin-top: 32px;
+}
+.nav .btn { flex: 1; }
+
+.hidden { display: none !important; }
+
+.err {
+  color: var(--error); font-size: 13px; margin-top: 6px;
+  display: none;
+}
+.err.show { display: block; }
+
+.success-icon {
+  width: 80px; height: 80px; margin: 0 auto 24px;
+  background: linear-gradient(135deg, #4ADE80, #22C55E);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 44px;
+}
+
+.footer {
+  margin-top: 40px; padding-top: 24px;
+  border-top: 1px solid var(--border);
+  color: var(--muted); font-size: 13px;
+  text-align: center;
+}
+.footer a { color: var(--accent-2); text-decoration: none; }
+
+@media (max-width: 500px) {
+  .wrap { padding: 16px 14px 40px; }
+  .card { padding: 20px; }
+  .hero-stats { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brand"><span class="dot"></span>Rodychi Media · Клієнтський бриф</div>
+
+  <!-- SCREEN: Welcome -->
+  <section id="screen-welcome" class="screen">
+    <h1>За <span class="accent">7 хвилин</span> ми зрозуміємо вашу ситуацію і підготуємо стратегію під вас.</h1>
+    <p class="lead">
+      10 коротких питань про ваш бізнес, аудиторію і цілі.
+      Відповіді допоможуть нам точно порахувати бюджет, обрати канали залучення і дати попередній прогноз по заявках.
+    </p>
+
+    <div class="hero-stats">
+      <div class="stat"><div class="num">10</div><div class="lbl">питань</div></div>
+      <div class="stat"><div class="num">7 хв</div><div class="lbl">часу</div></div>
+      <div class="stat"><div class="num">24 год</div><div class="lbl">до відповіді</div></div>
+    </div>
+
+    <button class="btn" onclick="startBrief()">Почати бриф →</button>
+
+    <div class="footer">
+      Будуть питання — пишіть <a href="https://t.me/rodychi_mng" target="_blank">@rodychi_mng</a>
+    </div>
+  </section>
+
+  <!-- SCREEN: Questions -->
+  <section id="screen-questions" class="screen hidden">
+    <div class="step-counter"><span id="step-label">Питання 1 з 10</span><span id="step-pct">10%</span></div>
+    <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
+
+    <div class="card" id="question-card">
+      <!-- Dynamically filled -->
+    </div>
+
+    <div class="nav">
+      <button class="btn secondary" id="btn-prev" onclick="prevStep()">← Назад</button>
+      <button class="btn" id="btn-next" onclick="nextStep()">Далі →</button>
+    </div>
+  </section>
+
+  <!-- SCREEN: Thank you -->
+  <section id="screen-thanks" class="screen hidden">
+    <div class="card" style="text-align: center;">
+      <div class="success-icon">✓</div>
+      <h1 style="font-size: 28px;">Дякуємо!</h1>
+      <p class="lead" style="margin: 16px auto 24px;">
+        Отримали вашу анкету. Протягом <b>24 годин</b> повернемось з попередньою стратегією,
+        розрахунком бюджету і прогнозом по заявках під вашу нішу.
+      </p>
+      <p class="lead" style="margin-bottom: 24px;">
+        Якщо виникнуть питання — пишіть напряму в телеграм:
+      </p>
+      <a class="btn" href="https://t.me/rodychi_mng" target="_blank" style="max-width: 320px; margin: 0 auto;">Написати @rodychi_mng →</a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    key: 'company_name',
+    type: 'text',
+    q: 'Як називається ваша компанія?',
+    hint: 'Назва бренду або юр. особи — як вам зручніше.',
+    placeholder: 'Наприклад: Нарешті в подорож',
+    required: true,
+  },
+  {
+    key: 'business_info',
+    type: 'multi',
+    q: 'Коротко про бізнес',
+    hint: 'Три швидких поля — щоб ми розуміли масштаб.',
+    fields: [
+      { key: 'niche', label: 'Ніша / що продаєте', placeholder: 'Напр.: авіатури + автобусні тури в Європу', type: 'text', required: true },
+      { key: 'years', label: 'Років на ринку', type: 'select', options: ['менше року', '1–2 роки', '3–5 років', '5+ років'], required: true },
+      { key: 'monthly_sales', label: 'Продажів на місяць (середнє)', type: 'select', options: ['до 10', '10–30', '30–100', '100–300', '300+'], required: true },
+    ],
+  },
+  {
+    key: 'economics',
+    type: 'multi',
+    q: 'Економіка одного продажу',
+    hint: 'Приблизно, щоб порахувати вашу комфортну вартість клієнта.',
+    fields: [
+      { key: 'avg_check', label: 'Середній чек (€)', type: 'select', options: ['до 100 €', '100–300 €', '300–800 €', '800–2000 €', '2000+ €'], required: true },
+      { key: 'margin', label: 'Маржа', type: 'select', options: ['до 10%', '10–20%', '20–40%', '40–60%', '60%+', 'не рахували'], required: true },
+      { key: 'repeat', label: 'Клієнт купує повторно?', type: 'select', options: ['рідко — одноразові', 'іноді — кожні кілька місяців', 'часто — постійні клієнти'], required: true },
+    ],
+  },
+  {
+    key: 'current_marketing',
+    type: 'multi',
+    q: 'Що зараз з просуванням',
+    hint: 'Коротко про поточні канали і попередній досвід.',
+    fields: [
+      { key: 'tg_subs', label: 'Підписників у Telegram (приблизно)', type: 'select', options: ['немає каналу', 'до 1 000', '1–5 тис', '5–20 тис', '20–100 тис', '100 тис+'], required: true },
+      { key: 'other_channels', label: 'Інші канали продажів (можна декілька)', type: 'checkboxes', options: ['Instagram', 'TikTok', 'Website', 'Google Maps', 'Сарафанне', 'Партнери', 'Офлайн'], required: false },
+      { key: 'paid_before', label: 'Запускали платну рекламу раніше?', type: 'select', options: ['ні, ніколи', 'так, самі', 'так, з іншою агенцією', 'так, з фрілансером'], required: true },
+    ],
+  },
+  {
+    key: 'paid_details',
+    type: 'textarea',
+    q: 'Якщо був платний досвід — коротко що саме і які результати',
+    hint: 'Канали (Meta Ads, Telegram Ads, посіви...), приблизний бюджет, що вийшло / не вийшло. Якщо не було — напишіть "не було".',
+    placeholder: 'Напр.: 3 місяці Meta Ads з попередньою агенцією, бюджет €800/міс, заявки по €15 але половина не доходила до оплати.',
+    required: false,
+  },
+  {
+    key: 'audience',
+    type: 'multi',
+    q: 'Ваша аудиторія',
+    hint: 'Хто ваш типовий клієнт.',
+    fields: [
+      { key: 'age', label: 'Основний вік', type: 'select', options: ['18–24', '25–34', '35–44', '45–54', '55+', 'змішана'], required: true },
+      { key: 'gender', label: 'Переважна стать', type: 'select', options: ['переважно жінки', 'переважно чоловіки', 'приблизно порівну'], required: true },
+      { key: 'geo', label: 'Географія клієнтів (країна, міста, регіони)', type: 'text', placeholder: 'Напр.: Німеччина — Берлін, Мюнхен, Гамбург', required: true },
+    ],
+  },
+  {
+    key: 'uvp',
+    type: 'textarea',
+    q: 'Чому клієнти обирають саме вас',
+    hint: 'Ваші 2–3 головні відмінності від конкурентів. Що говорите під час продажу.',
+    placeholder: 'Напр.: єдині хто продає тури з виїздом із 10 міст Німеччини, без переплат за трансфер; українськомовна підтримка 24/7.',
+    required: true,
+  },
+  {
+    key: 'goals',
+    type: 'multi',
+    q: 'Цілі на найближчі 3 місяці',
+    hint: 'Що для вас успіх — цифрами.',
+    fields: [
+      { key: 'main_goal', label: 'Головна мета', type: 'select', options: ['збільшити заявки', 'зростити виручку', 'набрати підписників у канал', 'повернути стару базу', 'запустити новий напрямок'], required: true },
+      { key: 'target_number', label: 'Цільовий показник (бажано цифра)', type: 'text', placeholder: 'Напр.: 100 заявок на місяць, або €15 000 виручки', required: true },
+      { key: 'start_when', label: 'Коли хочете почати', type: 'select', options: ['вчора', 'цього тижня', 'цього місяця', 'наступного місяця', 'ще обираю команду'], required: true },
+    ],
+  },
+  {
+    key: 'budget',
+    type: 'single',
+    q: 'Місячний рекламний бюджет',
+    hint: 'Чесно — щоб ми запропонували реалістичну стратегію. Це бюджет на самі покази реклами, окремо від вартості послуг агенції.',
+    type_field: 'radio',
+    options: ['до €500', '€500–1 000', '€1 000–3 000', '€3 000–7 000', '€7 000+', 'ще не вирішили'],
+    required: true,
+  },
+  {
+    key: 'ops',
+    type: 'multi',
+    q: 'Операційка',
+    hint: 'Як у вас побудований процес обробки заявок.',
+    fields: [
+      { key: 'who_handles', label: 'Хто обробляє заявки', type: 'select', options: ['я особисто', 'штатний менеджер', 'декілька менеджерів', 'бот + людина', 'поки ніхто'], required: true },
+      { key: 'has_crm', label: 'Чи є CRM або табличка', type: 'select', options: ['повноцінна CRM', 'Google-таблиця', 'нотатки у Telegram', 'ніде не фіксую'], required: true },
+      { key: 'country', label: 'Юридична сторона', type: 'select', options: ['компанія в Україні', 'компанія в ЄС', 'ФОП у третій країні', 'без юр. особи', 'інше'], required: true },
+    ],
+  },
+  {
+    key: 'contact',
+    type: 'multi',
+    q: 'Куди відправити стратегію',
+    hint: 'Контакти, щоб ми надіслали вам відповідь протягом 24 годин.',
+    fields: [
+      { key: 'name', label: 'Ваше ім\'я', type: 'text', placeholder: 'Напр.: Ксенія', required: true },
+      { key: 'contact', label: 'Telegram / email / телефон', type: 'text', placeholder: '@username або email', required: true },
+    ],
+  },
+];
+
+let STEP = 0;
+const ANSWERS = {};
+const quizId = Math.random().toString(36).slice(2, 10);
+const SESSION_SOURCE = (new URLSearchParams(location.search)).get('utm_source') || 'direct';
+
+const WEBHOOK = 'https://all-bots-combined.onrender.com/quiz';
+
+function startBrief() {
+  document.getElementById('screen-welcome').classList.add('hidden');
+  document.getElementById('screen-questions').classList.remove('hidden');
+  renderStep();
+}
+
+function renderStep() {
+  const q = QUESTIONS[STEP];
+  const card = document.getElementById('question-card');
+  const total = QUESTIONS.length - 1; // last one is contacts
+  const pct = Math.round(((STEP + 1) / QUESTIONS.length) * 100);
+  document.getElementById('step-label').textContent = `Питання ${STEP + 1} з ${QUESTIONS.length}`;
+  document.getElementById('step-pct').textContent = `${pct}%`;
+  document.getElementById('progress-bar').style.width = pct + '%';
+
+  let html = `<div class="q"><span class="num">${STEP + 1}</span>${q.q}</div>`;
+  if (q.hint) html += `<div class="hint">${q.hint}</div>`;
+
+  if (q.type === 'text') {
+    const v = ANSWERS[q.key] || '';
+    html += `<input class="input" id="input-main" placeholder="${q.placeholder || ''}" value="${escapeHtml(v)}" />`;
+  }
+  if (q.type === 'textarea') {
+    const v = ANSWERS[q.key] || '';
+    html += `<textarea class="textarea" id="input-main" placeholder="${q.placeholder || ''}">${escapeHtml(v)}</textarea>`;
+  }
+  if (q.type === 'single') {
+    html += `<div class="options">`;
+    q.options.forEach(opt => {
+      const checked = ANSWERS[q.key] === opt ? 'checked' : '';
+      html += `<label class="opt ${checked ? 'selected' : ''}"><input type="radio" name="${q.key}" value="${escapeHtml(opt)}" ${checked} onchange="pickRadio(this)"/><span class="box"></span><span>${opt}</span></label>`;
+    });
+    html += `</div>`;
+  }
+  if (q.type === 'multi') {
+    html += `<div style="display:flex;flex-direction:column;gap:16px">`;
+    q.fields.forEach(f => {
+      const v = (ANSWERS[q.key] && ANSWERS[q.key][f.key]) || '';
+      html += `<div><div class="hint" style="margin-bottom:6px;color:var(--text);font-weight:500">${f.label}</div>`;
+      if (f.type === 'text') {
+        html += `<input class="input" data-field="${f.key}" placeholder="${f.placeholder || ''}" value="${escapeHtml(v)}" />`;
+      } else if (f.type === 'select') {
+        html += `<select class="select" data-field="${f.key}"><option value="">— оберіть —</option>`;
+        f.options.forEach(o => html += `<option value="${escapeHtml(o)}" ${o === v ? 'selected' : ''}>${o}</option>`);
+        html += `</select>`;
+      } else if (f.type === 'checkboxes') {
+        const vArr = Array.isArray(v) ? v : [];
+        html += `<div class="options" data-field="${f.key}">`;
+        f.options.forEach(o => {
+          const checked = vArr.includes(o) ? 'checked' : '';
+          html += `<label class="opt ${checked ? 'selected' : ''}"><input type="checkbox" value="${escapeHtml(o)}" ${checked} onchange="toggleCheckbox(this)"/><span class="box"></span><span>${o}</span></label>`;
+        });
+        html += `</div>`;
+      }
+      html += `</div>`;
+    });
+    html += `</div>`;
+  }
+
+  html += `<div class="err" id="err">Будь ласка, заповніть усі обов'язкові поля.</div>`;
+  card.innerHTML = html;
+
+  document.getElementById('btn-prev').classList.toggle('hidden', STEP === 0);
+  document.getElementById('btn-next').textContent = STEP === QUESTIONS.length - 1 ? 'Надіслати бриф →' : 'Далі →';
+
+  const mainInput = document.getElementById('input-main');
+  if (mainInput) setTimeout(() => mainInput.focus(), 100);
+}
+
+function escapeHtml(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function pickRadio(input) {
+  input.closest('.options').querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+  input.closest('.opt').classList.add('selected');
+}
+
+function toggleCheckbox(input) {
+  input.closest('.opt').classList.toggle('selected', input.checked);
+}
+
+function saveStep() {
+  const q = QUESTIONS[STEP];
+  const err = document.getElementById('err');
+  err.classList.remove('show');
+
+  if (q.type === 'text' || q.type === 'textarea') {
+    const v = document.getElementById('input-main').value.trim();
+    if (q.required && !v) { err.classList.add('show'); return false; }
+    ANSWERS[q.key] = v;
+  }
+  if (q.type === 'single') {
+    const sel = document.querySelector(`input[name="${q.key}"]:checked`);
+    if (q.required && !sel) { err.classList.add('show'); return false; }
+    ANSWERS[q.key] = sel ? sel.value : '';
+  }
+  if (q.type === 'multi') {
+    const data = {};
+    for (const f of q.fields) {
+      let v;
+      if (f.type === 'checkboxes') {
+        v = [...document.querySelectorAll(`[data-field="${f.key}"] input:checked`)].map(i => i.value);
+      } else {
+        const el = document.querySelector(`[data-field="${f.key}"]`);
+        v = el ? el.value.trim() : '';
+      }
+      if (f.required && (!v || (Array.isArray(v) && !v.length))) {
+        err.classList.add('show');
+        return false;
+      }
+      data[f.key] = v;
+    }
+    ANSWERS[q.key] = data;
+  }
+  return true;
+}
+
+function nextStep() {
+  if (!saveStep()) return;
+  if (STEP < QUESTIONS.length - 1) {
+    STEP++;
+    renderStep();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    submitBrief();
+  }
+}
+
+function prevStep() {
+  if (STEP > 0) {
+    STEP--;
+    renderStep();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+async function submitBrief() {
+  const btn = document.getElementById('btn-next');
+  const prevText = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = 'Надсилаємо…';
+
+  // Flatten contact for notification formatting
+  const contact = ANSWERS.contact || {};
+  const payload = {
+    event: 'client_brief',
+    quizId: quizId,
+    source: SESSION_SOURCE,
+    name: contact.name || '',
+    contact: contact.contact || '',
+    company: ANSWERS.company_name || '',
+    niche: (ANSWERS.business_info && ANSWERS.business_info.niche) || '',
+    business_type: (ANSWERS.ops && ANSWERS.ops.country) || '',
+    avg_check: (ANSWERS.economics && ANSWERS.economics.avg_check) || '',
+    budget: ANSWERS.budget || '',
+    timing: (ANSWERS.goals && ANSWERS.goals.start_when) || '',
+    score: 0,
+    tier: 'brief',
+    answers: ANSWERS,
+    magnetUrl: '',
+  };
+
+  try {
+    const r = await fetch(WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok || !j.ok) throw new Error(j.err || ('status ' + r.status));
+
+    // Pixel event
+    if (window.fbq) {
+      fbq('track', 'Lead', { content_name: 'Client Brief', content_category: 'brief' });
+    }
+
+    document.getElementById('screen-questions').classList.add('hidden');
+    document.getElementById('screen-thanks').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (e) {
+    btn.disabled = false;
+    btn.innerHTML = prevText;
+    const err = document.getElementById('err');
+    err.textContent = 'Не вдалось надіслати. Напишіть напряму @rodychi_mng — повернемось особисто.';
+    err.classList.add('show');
+  }
+}
+
+// Enter key = next
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey && document.getElementById('screen-questions') && !document.getElementById('screen-questions').classList.contains('hidden')) {
+    const active = document.activeElement;
+    if (active && active.tagName === 'TEXTAREA') return;
+    e.preventDefault();
+    nextStep();
+  }
+});
+</script>
+
+</body>
+</html>
